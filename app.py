@@ -118,7 +118,6 @@ def login():
     form = LoginForm(request.form)
     if form.validate_on_submit():
         user = Business.query.filter_by(email=form.email.data).first()
-        print user.id
         if user:
             if bcrypt.hashpw(form.password.data.encode('utf-8'), user.password.encode('utf-8')) == user.password.encode('utf-8'):
                 login_user(user, remember=True)
@@ -126,6 +125,9 @@ def login():
             else:
                 flash('Username or Password is invalid', 'error')
                 return redirect(url_for('login'))
+        else:
+            flash('Username or Password is invalid', 'error')
+            return redirect(url_for('login'))
     return render_template("forms/login.html", form=form)
 
 @app.route("/logout", methods=["GET"])
