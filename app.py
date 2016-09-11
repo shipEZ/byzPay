@@ -121,7 +121,7 @@ def login():
         if user:
             if bcrypt.hashpw(form.password.data.encode('utf-8'), user.password.encode('utf-8')) == user.password.encode('utf-8'):
                 login_user(user, remember=True)
-                return redirect(request.args.get('next') or url_for('index'))
+                return redirect(request.args.get('next') or url_for('uploadFile'))
             else:
                 flash('Username or Password is invalid', 'error')
                 return redirect(url_for('login'))
