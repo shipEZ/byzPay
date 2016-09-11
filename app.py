@@ -168,12 +168,12 @@ def uploadFile():
     '''
 
 #preset routes. TBD
-@app.route('/')
+@app.route('/',methods=["GET","POST"])
 def home():
     form = LoginForm(request.form)
     return render_template("forms/login.html", form=form)
 
-@app.route('/')
+@app.route('/', methods=["GET","POST"])
 def index():
     form = LoginForm(request.form)
     return render_template("forms/login.html", form=form)
