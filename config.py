@@ -13,7 +13,7 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'database.db')
 #mail settings
 MAIL_SERVER='smtp.gmail.com'
 MAIL_PORT = 465
-MAIL_USERNAME = 'sachinbhat.as@gmail.com'
-MAIL_PASSWORD = 'bubbles@c5'
+MAIL_USERNAME = 'secret@gmail.com'
+MAIL_PASSWORD = 'secret'
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
