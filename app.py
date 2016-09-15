@@ -154,36 +154,24 @@ def uploadFile():
         excelFile = jsonify({"result": excelContent})
         print excelFile
         return excelFile
-    return '''
-    <!doctype html>
-    <title>Upload an excel file</title>
-    <body>
-    <h1>Excel file upload (csv, tsv, csvz, tsvz only)</h1>
-    <form action="" method=post enctype=multipart/form-data>
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/><p>
-    <input type=file name=file><input type=submit value=Upload>
-    </form>
-    </body>
-    </html>
-    '''
+    return render_template('forms/uploadFile.html')
 
 #preset routes. TBD
 @app.route('/',methods=["GET","POST"])
 def home():
-    form = LoginForm(request.form)
-    return render_template("forms/login.html", form=form)
+    return render_template('pages/index.html')
 
 @app.route('/', methods=["GET","POST"])
 def index():
-    form = LoginForm(request.form)
-    return render_template("forms/login.html", form=form)
+    return render_template('pages/index.html')
 
 @app.route('/about')
 def about():
-    return render_template('pages/placeholder.about.html')
+    return render_template('pages/index.html')
 
 @app.route('/register')
 def register():
+    return redirect(url_for('createBusiness'))
     form = ForgotForm(request.form)
     return render_template('pages/register.html', form=form)
 
