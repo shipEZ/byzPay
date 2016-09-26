@@ -165,7 +165,7 @@ def create_business():
         db.session.add(user)
         db.session.commit()
         flash('User successfully registered')
-        return redirect(url_for('login', user=user))
+        return redirect(url_for('login'))
     #else:
     #    flash('Error. Please try again!')
     return render_template('forms/createBusiness.html', form=form)
