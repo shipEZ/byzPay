@@ -1,0 +1,17 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Sent Invoices{% endblock %}
+{% block content %}
+    Hi {{ current_user.name }},
+        Thanks for using our service. We emailed the following invoices
+    {{ pagination.info }}
+    {{ pagination.links }}
+    <table>
+        {% for key, value in result.iteritems() %}
+           <tr>
+                <td> {{ key }} </td>
+                <td> <a href="{{ url_for('static', filename='invoices/'+value) }}" style="text-decoration: underline;">{{ value }}</a> </td>
+           </tr>
+        {% endfor %}
+    </table>
+    {{ pagination.links }}
+{% endblock %}

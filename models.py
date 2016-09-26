@@ -69,6 +69,31 @@ class Business(Base):
         """False, as anonymous users aren't supported."""
         return False
 
+class Invoice(Base):
+    __tablename__ = 'Invoices'
+
+    id = db.Column(db.Integer, primary_key=True)
+    invoiceNumber = db.Column(db.String(120))
+    clientEmail = db.Column(db.String(120))
+    businessId = db.Column(db.String(30))
+    invoiceAmt = db.Column(db.String(30))
+    invoiceDueDate = db.Column(db.String(30))
+    invoiceDate = db.Column(db.String(30))
+    invoiceDesc = db.Column(db.String(30))
+
+    def __init__(self, invoiceNumber=None, clientEmail=None, businessId=None, invoiceAmt=None, invoiceDueDate=None,
+                 invoiceDate=None,  invoiceDesc=None):
+        self.invoiceNumber = invoiceNumber
+        self.clientEmail = clientEmail
+        self.businessId = businessId
+        self.invoiceAmt = invoiceAmt
+        self.invoiceDueDate = invoiceDueDate
+        self.invoiceDate = invoiceDate
+        self.invoiceDesc = invoiceDesc
+
+    def __repr__(self):
+        return "%d/%s/%s/%s" % (self.id, self.clientEmail, self.invoiceAmt, self.invoiceDueDate)
+
 '''
 class User(Base):
     __tablename__ = 'Users'

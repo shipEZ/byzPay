@@ -47,10 +47,8 @@
             <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a href="{{ url_for('home') }}">Scribe Home</a></li>
           </ul>
           <ul class="nav navbar-nav pull-right">
-			  <li><a href="{{ url_for('update_business_details') }}">Update Details</a></li>
-			  <li><a href="{{ url_for('create_invoice') }}">Create Invoices</a></li>
-			  <li><a href="{{ url_for('dynamic_discounting') }}">Dynamic Discounting</a></li>
-			  <li><a href="{{ url_for('logout') }}">logout</a></li>
+            <li><a href="{{ url_for('register') }}">Signup</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
           </ul>
         </div>
     </nav>
@@ -100,7 +98,7 @@
 					<div class="widget">
 						<h5>Contact us</h5>
 						<p>
-						Contact us over email at admin@tryscribe.com or over phone at +1-8586667323
+						Contact us over email at support@tryscribe.com or over phone at +1-8586667323
 						</p>
 					</div>
 				</div>
@@ -144,12 +142,6 @@
 
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 
-	<!-- jscript -->
-	<script type=text/javascript>
-    $("#discount").click(function(){
-        $("#sendDiscount").toggle();
-    });
-	</script>
 	<!-- Core JavaScript Files -->
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>

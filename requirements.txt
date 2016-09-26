@@ -20,3 +20,4 @@ flask-login
 Flask-Excel
 jsonify
 Flask-Mail
+flask-paginate
