@@ -2,34 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63d9db46-523d-4d95-a6f8-fd007865efcc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/layouts/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/pages/dynamicDiscounting.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/pages/printResult.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/invoice1000.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/invoice1001.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/invoice1002.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/invoice1003.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/invoice1004.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/invoice1005.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/invoice1006.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/invoice1007.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/invoice1008.pdf" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database.db" afterPath="$PROJECT_DIR$/database.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.py" afterPath="$PROJECT_DIR$/config.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/invoice.py" afterPath="$PROJECT_DIR$/invoice.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models.py" afterPath="$PROJECT_DIR$/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/style.css" afterPath="$PROJECT_DIR$/static/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/forms/createBusiness.html" afterPath="$PROJECT_DIR$/templates/forms/createBusiness.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/forms/forgot.html" afterPath="$PROJECT_DIR$/templates/forms/forgot.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/forms/login.html" afterPath="$PROJECT_DIR$/templates/forms/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/forms/register.html" afterPath="$PROJECT_DIR$/templates/forms/register.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/layouts/main.html" afterPath="$PROJECT_DIR$/templates/layouts/main.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/pages/index.html" afterPath="$PROJECT_DIR$/templates/pages/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/pages/placeholder.about.html" afterPath="$PROJECT_DIR$/templates/pages/placeholder.about.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testNotebook.ipynb" afterPath="$PROJECT_DIR$/testNotebook.ipynb" />
     </list>
     <ignored path="byzPay.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -106,8 +79,8 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="219" column="38" selection-start-line="219" selection-start-column="38" selection-end-line="219" selection-end-column="38" />
+            <state relative-caret-position="980">
+              <caret line="232" column="12" selection-start-line="232" selection-start-column="4" selection-end-line="232" selection-end-column="12" />
               <folding>
                 <element signature="e#169#225#0" expanded="true" />
               </folding>
@@ -115,7 +88,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
@@ -128,8 +101,8 @@
       <file leaf-file-name="uploadFile.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/forms/uploadFile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+            <state relative-caret-position="60">
+              <caret line="4" column="75" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -140,6 +113,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1605">
               <caret line="149" column="36" selection-start-line="149" selection-start-column="36" selection-end-line="149" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/pages/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="30" column="72" selection-start-line="30" selection-start-column="72" selection-end-line="30" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -169,7 +152,6 @@
         <option value="$PROJECT_DIR$/templates/forms/forgot.html" />
         <option value="$PROJECT_DIR$/templates/forms/register.html" />
         <option value="$PROJECT_DIR$/templates/layouts/index.html" />
-        <option value="$PROJECT_DIR$/templates/pages/index.html" />
         <option value="$PROJECT_DIR$/templates/forms/login.html" />
         <option value="$PROJECT_DIR$/templates/forms/uploadFile.html" />
         <option value="$PROJECT_DIR$/invoice.py" />
@@ -179,6 +161,7 @@
         <option value="$PROJECT_DIR$/templates/pages/dynamicDiscounting.html" />
         <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/static/css/style.css" />
+        <option value="$PROJECT_DIR$/templates/pages/index.html" />
       </list>
     </option>
   </component>
@@ -851,16 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/pages/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1335">
-          <caret line="89" column="92" selection-start-line="89" selection-start-column="92" selection-end-line="89" selection-end-column="92" />
-          <folding>
-            <element signature="n#style#0;n#section#1;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/forms/createBusiness.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -888,14 +861,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/forms/uploadFile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -952,20 +917,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="621" column="16" selection-start-line="621" selection-start-column="16" selection-end-line="621" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/forms/uploadFile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="75" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="219" column="38" selection-start-line="219" selection-start-column="38" selection-end-line="219" selection-end-column="38" />
+        <state relative-caret-position="980">
+          <caret line="232" column="12" selection-start-line="232" selection-start-column="4" selection-end-line="232" selection-end-column="12" />
           <folding>
             <element signature="e#169#225#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/style.css">
+    <entry file="file://$PROJECT_DIR$/templates/pages/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="621" column="16" selection-start-line="621" selection-start-column="16" selection-end-line="621" selection-end-column="16" />
+        <state relative-caret-position="135">
+          <caret line="30" column="72" selection-start-line="30" selection-start-column="72" selection-end-line="30" selection-end-column="72" />
           <folding />
         </state>
       </provider>

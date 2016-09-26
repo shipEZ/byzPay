@@ -28,19 +28,22 @@
 
 					</div>
 					<div class="col-lg-6">
-						<div class="form-wrapper">
+						<div class="form-wrapper" style="padding-top:150px;">
 						<div class="wow fadeInRight" data-wow-duration="2s" data-wow-delay="0.2s">
 						
 							<div class="panel panel-skin">
 							<div class="panel-heading" style="padding-bottom:12px;">
-									<h3 class="panel-title"><span class="fa fa-pencil-square-o"></span> Sign up for beta access <!--<small>(It's free!)</small>--></h3>
+									<h3 class="panel-title"><span class="fa fa-pencil-square-o"></span> Sign up today for free tier access <!--<small>(It's free!)</small>--></h3>
 									</div>
 									<div class="panel-body">
+										<a href="{{ url_for('login') }}" class="btn btn-skin btn-block btn-lg">Sign in</a>
+										<a href="{{ url_for('register') }}" class="btn btn-skin btn-block btn-lg">Sign up</a>
+										<!--
 									<form role="form" class="lead">
 										<div class="row">
 											<div class="col-xs-6 col-sm-6 col-md-6">
 												<div class="form-group">
-													<label>First Name</label>
+													<label></label>
 													<input type="text" name="first_name" id="first_name" class="form-control input-md">
 												</div>
 											</div>
