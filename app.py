@@ -176,7 +176,6 @@ def create_business():
 def update_business_details():
     form = UpdateBusinessDetails(request.form)
     if form.validate_on_submit():
-        print "current_user is: ", current_user
         updates={'street':form.data['street'],'city':form.data['city'],'state':form.data['state'],'country':form.data['country'],
                  'zipcode':form.data['zipCode'],'vatno':form.data['vatTaxNo']}
         for k,v in updates:
@@ -184,8 +183,8 @@ def update_business_details():
             setattr(current_user,k,v)
         db.session.commit()
         return redirect(url_for('create_invoice'))
-    else:
-        flash('wrong username/password')
+    #else:
+    #    flash('please enter correct details')
     return render_template('forms/updateBusinessDetails.html', form=form)
 
 @app.route('/login', methods=["GET","POST"])
