@@ -33,9 +33,8 @@ class Business(Base):
     vatTaxNo=db.Column(db.String(120))
     logo=db.Column(db.String(120))
 
-    def __init__(self, authenticated=False, name=None, company=None, email=None, password=None, phone=None, website=None,
-        street=None, city=None, state=None, country=None, zipCode=None, vatTaxNo=None, logo=None):
-        self.authenticated = True
+    def __init__(self, name=None, company=None, email=None, password=None, phone=None, website=None,
+        street=None, city=None, state=None, country=None, zipCode=None, vatTaxNo=None, logo=None, authenticated=False):
         self.name = name
         self.email = email
         self.company = company
@@ -49,6 +48,7 @@ class Business(Base):
         self.zipCode = zipCode
         self.vatTaxNo = vatTaxNo
         self.logo = logo
+        self.authenticated = authenticated
 
     def __repr__(self):
         return "%d/%s/%s" % (self.id, self.name, self.password)

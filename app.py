@@ -12,7 +12,8 @@ from logging import Formatter, FileHandler
 from forms import *
 from models import *
 from invoice import *
-from datetime import datetime, date
+from itsdangerous import URLSafeTimedSerializer
+from datetime import datetime, date, timedelta
 from pyinvoice.models import InvoiceInfo, ServiceProviderInfo, ClientInfo, Item, Transaction
 from pyinvoice.templates import SimpleInvoice
 import flask_excel as excel
@@ -72,23 +73,28 @@ def load_user(id):
     """
     return Business.query.get(int(id))
 
+def createLineInvoice(line,current_user):
+    invoiceNumber = str(line[0])
+    InvoiceDueDate = line[6]
+    invoiceAmt = line[7]
+    invoiceDesc = line[4]  # invoiceSummary i.e
+    doc = SimpleInvoice('invoice' + invoiceNumber + '.pdf')
+    doc.invoice_info = InvoiceInfo(line[0], datetime.now(),InvoiceDueDate)  # Invoice info - id, invoice date, invoice due date
+    clientEmail = line[2]
+    doc.client_info = ClientInfo(email=clientEmail)
+    doc.add_item(Item(invoiceDesc, line[5], invoiceAmt, '0'))
+    invoice = Invoice(invoiceNumber, clientEmail, current_user.id, invoiceAmt, InvoiceDueDate, datetime.now(),
+                      invoiceDesc)
+    doc.finish()
+    return invoice
+
 def createInvoice(excelContent, current_user):
     invoiceDict={}
     for line in excelContent[1:]:
-        invoiceNumber=str(line[0])
-        InvoiceDueDate = line[6]
-        invoiceAmt = line[7]
-        invoiceDesc = line[4] #invoiceSummary i.e
-        doc = SimpleInvoice('invoice'+invoiceNumber+'.pdf')
-        doc.invoice_info = InvoiceInfo(line[0], datetime.now(), InvoiceDueDate)  # Invoice info - id, invoice date, invoice due date
-        clientEmail = line[2]
-        doc.client_info = ClientInfo(email=clientEmail)
-        doc.add_item(Item(invoiceDesc,line[5],invoiceAmt,'0'))
-        invoiceDict['invoice'+str(line[0])+'.pdf']=clientEmail
-        invoice = Invoice(invoiceNumber,clientEmail,current_user.id, invoiceAmt, InvoiceDueDate,datetime.now(),invoiceDesc)
+        invoice = createLineInvoice(line)
         db.session.add(invoice)
         db.session.commit()
-        doc.finish()
+        invoiceDict['invoice' + str(line[0]) + '.pdf'] = line[2]
     return invoiceDict
 
 def sendMail(invoiceDict):
@@ -100,7 +106,7 @@ def sendMail(invoiceDict):
         for invoice,email in invoiceDict.items():
             message = 'Kindly pay them to the following bank account 000000000'
             subject = "An invoice is due." #"hello, %s" % user.name
-            msg = Message(sender = 'hi@tryscribe.com',
+            msg = Message(sender = app.config['MAIL_DEFAULT_SENDER'],
                           recipients=[email],
                           body=message,
                           subject=subject)
@@ -110,6 +116,32 @@ def sendMail(invoiceDict):
             os.rename(invoice,directory+invoice)
             invoiceMailDict[email]=invoice
     return invoiceMailDict
+
+def sendConfirmationMail(to, subject, template):
+    msg = Message(
+        subject,
+        recipients=[to],
+        html=template,
+        sender=app.config['MAIL_DEFAULT_SENDER']
+    )
+    mail.send(msg)
+
+def generate_confirmation_token(email):
+    serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+    return serializer.dumps(email, salt=app.config['SECURITY_PASSWORD_SALT'])
+
+
+def confirm_token(token, expiration=3600):
+    serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
+    try:
+        email = serializer.loads(
+            token,
+            salt=app.config['SECURITY_PASSWORD_SALT'],
+            max_age=expiration
+        )
+    except:
+        return False
+    return email
 
 def setSearchOption(request):
     search = False
@@ -144,14 +176,36 @@ def display_result():
     else:
         return redirect(url_for('home'))
 
+@csrf.exempt
 @app.route("/dynamicDiscounting", methods=['GET', 'POST'])
-@login_required
 def dynamic_discounting():
     invoices = Invoice.query.filter_by(businessId=current_user.id)
     page = request.args.get('page', type=int, default=1)
     search = setSearchOption(request)
     pagination = Pagination(page=page, total=invoices.count(), search=search, record_name='invoices')
     return render_template('pages/dynamicDiscounting.html',invoices=invoices,pagination=pagination)
+
+@csrf.exempt
+@app.route('/sendDiscount', methods=['GET','POST'])
+def send_discount():
+    discount =  request.form['discount']
+    invoiceId = request.form['invoiceId']
+    print "##############################"
+    print discount
+    print invoiceId
+    invoice = Invoice.query.filter_by(invoiceNumber=str(invoiceId)).first()
+    invoiceAmt = str(float(invoice.invoiceAmt)*float(discount)/100.0)
+    invoiceDueDate = datetime.today()+timedelta(days=30)
+    invoiceNew = createLineInvoice([invoice.invoiceNumber+"_dd", "", invoice.clientEmail, "", invoice.invoiceDesc, "", invoiceDueDate,
+         invoiceAmt],current_user)
+    db.session.add(invoiceNew)
+    db.session.commit()
+    invoiceDict={}
+    invoiceDict['invoice' + invoice.invoiceNumber + '_dd.pdf'] = invoice.clientEmail
+    returnedInvoiceDict = sendMail(invoiceDict)
+    print returnedInvoiceDict
+    flash("we sent the new invoice to the client","success")
+    return redirect(url_for('dynamic_discounting'))
 #----------------------------------------------------------------------------#
 # Login,registration and other common controllers.
 #----------------------------------------------------------------------------#
@@ -164,8 +218,15 @@ def create_business():
                                 form.data['phone'])
         db.session.add(user)
         db.session.commit()
-        flash('User successfully registered')
-        return redirect(url_for('login'))
+        print user.email
+        token = generate_confirmation_token(user.email)
+        confirm_url = url_for('confirm_email', token=token, _external=True)
+        html = render_template('pages/activate.html', confirm_url=confirm_url)
+        subject = "Please confirm your email"
+        sendConfirmationMail(user.email, subject, html)
+        login_user(user)
+        flash('A confirmation email has been sent via email.', 'success')
+        return redirect(url_for("login"))
     #else:
     #    flash('Error. Please try again!')
     return render_template('forms/createBusiness.html', form=form)
@@ -185,6 +246,23 @@ def update_business_details():
     #else:
     #    flash('please enter correct details')
     return render_template('forms/updateBusinessDetails.html', form=form)
+
+@app.route('/confirm/<token>')
+@login_required
+def confirm_email(token):
+    try:
+        email = confirm_token(token)
+    except:
+        flash('The confirmation link is invalid or has expired.', 'danger')
+    user = Business.query.filter_by(email=email).first()
+    if user.authenticated:
+        flash('Account already confirmed. Please login.', 'success')
+    else:
+        user.authenticated = True
+        db.session.add(user)
+        db.session.commit()
+        flash('You have confirmed your account. Thanks!', 'success')
+    return redirect(url_for('home'))
 
 @app.route('/login', methods=["GET","POST"])
 def login():

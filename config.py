@@ -7,6 +7,7 @@ DEBUG = True
 # Secret key for session management. You can generate random strings here:
 # http://clsc.net/tools-old/random-string-generator.php
 SECRET_KEY = 'sachin18590'
+SECURITY_PASSWORD_SALT = 'sachin18590'
 # Connect to the database
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'database.db')
 
@@ -17,3 +18,6 @@ MAIL_USERNAME = 'sachinbhat.as@gmail.com' #hi@tryscribe.com
 MAIL_PASSWORD = 'sachin99' #sachin99
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
+
+# mail accounts
+MAIL_DEFAULT_SENDER = 'hi@scribe.com'
