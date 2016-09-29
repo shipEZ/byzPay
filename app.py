@@ -21,8 +21,6 @@ from flask import request
 import json, os, bcrypt
 from flask_mail import Mail, Message
 from flask_paginate import Pagination
-from gevent.wsgi import WSGIServer
-
 #----------------------------------------------------------------------------#
 # App Config.
 #----------------------------------------------------------------------------#
@@ -350,6 +348,6 @@ if not app.debug:
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, threaded=True) #add debug=False to call teardown_req and delete sessions
+    app.run(host='0.0.0.0', port=port) #add debug=False to call teardown_req and delete sessions
     #http_server = WSGIServer(('0.0.0.0', port), app)
     #http_server.serve_forever()
