@@ -109,7 +109,7 @@ def sendMail(invoiceDict):
             message = "You've received an invoice from %s at %s for a total amount of $ %s. " \
                       "Please pay this invoice by the due date of %s. " \
                       "Contact %s directly at %s for any questions." % (business.name,business.company,invoice.invoiceAmt,invoice.invoiceDueDate,business.name, business.phone)
-            subject = "Invoice received from %s for $%s",business.company, invoice.invoiceAmt
+            subject = "Invoice received from %s for $%s" % (business.company, invoice.invoiceAmt)
             msg = Message(sender = app.config['MAIL_DEFAULT_SENDER'],
                           recipients=[invoice.clientEmail],
                           body=message,
