@@ -15,7 +15,7 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'database.db')
 MAIL_SERVER='smtp.gmail.com' #smtp.zoho.com
 MAIL_PORT = 465
 MAIL_USERNAME = 'sachinbhat.as@gmail.com' #hi@tryscribe.com
-MAIL_PASSWORD = 'sachin99' #sachin99
+MAIL_PASSWORD = 'english@c4' #sachin99
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
 

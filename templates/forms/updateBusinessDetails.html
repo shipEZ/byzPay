@@ -1,6 +1,7 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Update Business Details{% endblock %}
 {% block content %}
+  Please update ‘Your Company Details’ to include this information in your invoices
   <form method="post" class="form">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <h3 class="form-heading">Update Details <a href="{{ url_for('home') }}" title="Back to homepage"><i class="fa fa-home pull-right"></i></a></h3>

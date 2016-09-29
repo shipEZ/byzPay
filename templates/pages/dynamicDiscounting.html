@@ -2,9 +2,6 @@
 {% block title %}Dynamic Discounting{% endblock %}
 {% block content %}
     Send new invoice with discounted amounts
-<!--<form id="sendDiscount" style="padding:0; margin:0; width:100%; display:none">
-        Discount(%): <input type="text" name="firstname"> &nbsp;Due Date:<input type="text" name="lastname">&nbsp;<input type="submit" value="Send invoice" >
-    </form>-->
     {{ pagination.info }}
     {{ pagination.links }}
     <table>
@@ -24,11 +21,11 @@
             <td>{{ invoice.clientEmail }}</td>
               <td>{{ invoice.invoiceAmt }}</td>
             <td>{{ invoice.invoiceDueDate }}</td>
-              <form action="." method="POST">
+              <form action="/dynamicDiscounting" method="POST">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <td><input type="range" id="discount" name="discount"  value="10" min="0" max="100"><output for="discount" onforminput="value = discount.valueAsNumber;"></output>
                 <input type="hidden" id="invoiceId" name="invoiceId" value="{{ invoice.invoiceNumber }}"></td>
-            <td><input type="submit" name="my-form" id="sendDiscount" value="Send Discount"></td>
+            <td><input type="submit" name="my-form" id="sendDiscount2" value="Send Discount"></td>
             </form>
           </tr>
         {% endfor %}
@@ -78,7 +75,7 @@
                 var discount = $('#discount').val();
                 var invoiceId = $('#invoiceId').val();
                 $.ajax({
-                    url: '/sendDiscount',
+                    url: '/dynamicDiscounting',
                     data: $('form').serialize(),
                     type: 'POST',
                     success: function(response) {

@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import TextField, PasswordField
+from wtforms import TextField, PasswordField, IntegerField
 from wtforms.validators import DataRequired, EqualTo, Length, Email
 
 # Set your classes here.
@@ -17,8 +17,8 @@ class RegisterBusiness(Form):
     password = PasswordField(
         'Password', validators=[DataRequired(), Length(min=2, max=40)]
     )
-    phone = TextField(
-        'phone no', validators=[DataRequired(message="Please enter your phone number"), Length(min=1, max=13)]
+    phone = IntegerField(
+        'phone no', validators=[DataRequired(message="Please enter your phone number")]
     )
     '''
     confirm = PasswordField(

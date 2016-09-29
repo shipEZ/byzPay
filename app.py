@@ -21,6 +21,7 @@ from flask import request
 import json, os, bcrypt
 from flask_mail import Mail, Message
 from flask_paginate import Pagination
+from gevent.wsgi import WSGIServer
 
 #----------------------------------------------------------------------------#
 # App Config.
@@ -71,6 +72,8 @@ def load_user(id):
     """Given *user_id*, return the associated User object.
     :param unicode user_id: user_id (email) user to retrieve
     """
+    if id is None or id == 'None':
+        id = -1
     return Business.query.get(int(id))
 
 def createLineInvoice(line,current_user):
@@ -91,10 +94,10 @@ def createLineInvoice(line,current_user):
 def createInvoice(excelContent, current_user):
     invoiceDict={}
     for line in excelContent[1:]:
-        invoice = createLineInvoice(line)
+        invoice = createLineInvoice(line,current_user)
         db.session.add(invoice)
         db.session.commit()
-        invoiceDict['invoice' + str(line[0]) + '.pdf'] = line[2]
+        invoiceDict['invoice' + str(line[0]) + '.pdf'] = invoice
     return invoiceDict
 
 def sendMail(invoiceDict):
@@ -103,19 +106,39 @@ def sendMail(invoiceDict):
         directory='static/invoices/'+current_user.name+'/'
         if not os.path.exists(directory):
             os.makedirs(directory)
-        for invoice,email in invoiceDict.items():
-            message = 'Kindly pay them to the following bank account 000000000'
-            subject = "An invoice is due." #"hello, %s" % user.name
+        for invoicePdf,invoice in invoiceDict.items():
+            business = Business.query.filter_by(id=invoice.businessId).first()
+            message = "You've received an invoice from %s at %s for a total amount of $ %s. " \
+                      "Please pay this invoice by the due date of %s. " \
+                      "Contact %s directly at %s for any questions." % (business.name,business.company,invoice.invoiceAmt,invoice.invoiceDueDate,business.name, business.phone)
+            subject = "Invoice received from %s for $%s",business.company, invoice.invoiceAmt
             msg = Message(sender = app.config['MAIL_DEFAULT_SENDER'],
-                          recipients=[email],
+                          recipients=[invoice.clientEmail],
                           body=message,
                           subject=subject)
-            with app.open_resource(invoice) as fp:
-                msg.attach(invoice, "application/pdf", fp.read())
+            with app.open_resource(invoicePdf) as fp:
+                msg.attach(invoicePdf, "application/pdf", fp.read())
             conn.send(msg)
-            os.rename(invoice,directory+invoice)
-            invoiceMailDict[email]=invoice
+            os.rename(invoicePdf,directory+invoicePdf)
+            invoiceMailDict[invoice.clientEmail]=invoicePdf
     return invoiceMailDict
+
+def send_discount(request):
+    discount =  request.form['discount']
+    invoiceId = request.form['invoiceId']
+    print discount
+    print invoiceId
+    invoice = Invoice.query.filter_by(invoiceNumber=str(invoiceId)).first()
+    invoiceAmt = str(int(float(invoice.invoiceAmt))-int(float(invoice.invoiceAmt)*float(discount)/100.0))
+    invoiceDueDate = datetime.today()+timedelta(days=30)
+    invoiceNew = createLineInvoice([invoice.invoiceNumber+"_discounted", "", invoice.clientEmail, "", invoice.invoiceDesc, "", invoiceDueDate,
+         invoiceAmt],current_user)
+    db.session.add(invoiceNew)
+    db.session.commit()
+    invoiceDict={}
+    invoiceDict['invoice' + invoice.invoiceNumber + '_discounted.pdf'] = invoice
+    returnedInvoiceDict = sendMail(invoiceDict)
+    return returnedInvoiceDict
 
 def sendConfirmationMail(to, subject, template):
     msg = Message(
@@ -149,6 +172,11 @@ def setSearchOption(request):
     if q:
         search = True
     return search
+
+def redirect_url(default='index'):
+    return request.args.get('next') or \
+           request.referrer or \
+           url_for(default)
 #----------------------------------------------------------------------------#
 # idea specific controllers.
 #----------------------------------------------------------------------------#
@@ -179,33 +207,18 @@ def display_result():
 @csrf.exempt
 @app.route("/dynamicDiscounting", methods=['GET', 'POST'])
 def dynamic_discounting():
+    if request.method == 'POST':
+        returnedInvoiceDict = send_discount(request)
+        flash("we sent the new invoice to the client", "success")
     invoices = Invoice.query.filter_by(businessId=current_user.id)
     page = request.args.get('page', type=int, default=1)
     search = setSearchOption(request)
-    pagination = Pagination(page=page, total=invoices.count(), search=search, record_name='invoices')
-    return render_template('pages/dynamicDiscounting.html',invoices=invoices,pagination=pagination)
+    ITEMS_PER_PAGE = 10
+    i = (page - 1) * ITEMS_PER_PAGE
+    invoicesPerPage = invoices[i:i + ITEMS_PER_PAGE]
+    pagination = Pagination(page=page, per_page=10, total=invoices.count(), search=search, record_name='invoices',css_framework='bootstrap3')
+    return render_template('pages/dynamicDiscounting.html',title='Discounts!!',invoices=invoicesPerPage,pagination=pagination)
 
-@csrf.exempt
-@app.route('/sendDiscount', methods=['GET','POST'])
-def send_discount():
-    discount =  request.form['discount']
-    invoiceId = request.form['invoiceId']
-    print "##############################"
-    print discount
-    print invoiceId
-    invoice = Invoice.query.filter_by(invoiceNumber=str(invoiceId)).first()
-    invoiceAmt = str(float(invoice.invoiceAmt)*float(discount)/100.0)
-    invoiceDueDate = datetime.today()+timedelta(days=30)
-    invoiceNew = createLineInvoice([invoice.invoiceNumber+"_dd", "", invoice.clientEmail, "", invoice.invoiceDesc, "", invoiceDueDate,
-         invoiceAmt],current_user)
-    db.session.add(invoiceNew)
-    db.session.commit()
-    invoiceDict={}
-    invoiceDict['invoice' + invoice.invoiceNumber + '_dd.pdf'] = invoice.clientEmail
-    returnedInvoiceDict = sendMail(invoiceDict)
-    print returnedInvoiceDict
-    flash("we sent the new invoice to the client","success")
-    return redirect(url_for('dynamic_discounting'))
 #----------------------------------------------------------------------------#
 # Login,registration and other common controllers.
 #----------------------------------------------------------------------------#
@@ -218,7 +231,6 @@ def create_business():
                                 form.data['phone'])
         db.session.add(user)
         db.session.commit()
-        print user.email
         token = generate_confirmation_token(user.email)
         confirm_url = url_for('confirm_email', token=token, _external=True)
         html = render_template('pages/activate.html', confirm_url=confirm_url)
@@ -259,8 +271,8 @@ def confirm_email(token):
         flash('Account already confirmed. Please login.', 'success')
     else:
         user.authenticated = True
-        db.session.add(user)
-        db.session.commit()
+        #db.session.add(user)
+        #db.session.commit()
         flash('You have confirmed your account. Thanks!', 'success')
     return redirect(url_for('home'))
 
@@ -338,4 +350,6 @@ if not app.debug:
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port) #add debug=False to call teardown_req and delete sessions
+    app.run(host='0.0.0.0', port=port, threaded=True) #add debug=False to call teardown_req and delete sessions
+    #http_server = WSGIServer(('0.0.0.0', port), app)
+    #http_server.serve_forever()
