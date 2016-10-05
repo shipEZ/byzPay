@@ -104,6 +104,8 @@ def createInvoice(excelContent, current_user):
     invoiceDict['invoice' + str(line[0]) + '.pdf'] = invoice
   return invoiceDict
 
+def sendReminder(invoiceDict):
+  return
 
 def sendMail(invoiceDict):
   with mail.connect() as conn:
@@ -164,7 +166,6 @@ def sendConfirmationMail(to, subject, template):
 def generate_confirmation_token(email):
   serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
   return serializer.dumps(email, salt=app.config['SECURITY_PASSWORD_SALT'])
-
 
 def confirm_token(token, expiration=3600):
   serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
@@ -266,6 +267,32 @@ def dynamic_discounting():
 # Login,registration and other common controllers.
 # ----------------------------------------------------------------------------#
 
+@app.route('/login', methods=["GET", "POST"])
+def login():
+  form = LoginForm(request.form)
+  if form.validate_on_submit():
+    user = Business.query.filter_by(email=form.email.data).first()
+    if user:
+      if bcrypt.hashpw(form.password.data.encode('utf-8'), user.password.encode('utf-8')) == user.password.encode(
+          'utf-8'):
+        login_user(user, remember=True)
+        return redirect(request.args.get('next') or url_for('home'))
+      else:
+        flash('Username or Password is invalid', 'error')
+        return redirect(url_for('login'))
+    else:
+      flash('Username or Password is invalid', 'error')
+      return redirect(url_for('login'))
+  return render_template("forms/login.html", form=form)
+
+
+@app.route("/logout", methods=["GET"])
+@login_required
+def logout():
+  print current_user
+  logout_user()
+  return redirect(url_for('index'))
+
 @app.route('/createBusiness', methods=["GET", "POST"])
 def create_business():
   form = RegisterBusiness(request.form)
@@ -304,7 +331,6 @@ def update_business_details():
   #    flash('please enter correct details')
   return render_template('forms/updateBusinessDetails.html', form=form)
 
-
 @app.route('/confirm/<token>')
 @login_required
 def confirm_email(token):
@@ -322,37 +348,38 @@ def confirm_email(token):
     flash('You have confirmed your account. Thanks!', 'success')
   return redirect(url_for('home'))
 
+@app.route('/resetPassword/<token>', methods=["GET", "POST"])
+def reset_password(token):
+    try:
+        email = confirm_token(token)
+    except:
+      flash('The recovery link is invalid or has expired.', 'danger')
 
-@app.route('/login', methods=["GET", "POST"])
-def login():
-  form = LoginForm(request.form)
-  if form.validate_on_submit():
-    user = Business.query.filter_by(email=form.email.data).first()
-    if user:
-      if bcrypt.hashpw(form.password.data.encode('utf-8'), user.password.encode('utf-8')) == user.password.encode(
-          'utf-8'):
-        login_user(user, remember=True)
-        return redirect(request.args.get('next') or url_for('home'))
-      else:
-        flash('Username or Password is invalid', 'error')
+    form = ResetPasswordSubmit(request.form)
+    if form.validate_on_submit():
+        user = Business.query.filter_by(email=email).first()
+        user.password = form.password.data
+        #db.session.add(user)
+        #db.session.commit()
         return redirect(url_for('login'))
-    else:
-      flash('Username or Password is invalid', 'error')
-      return redirect(url_for('login'))
-  return render_template("forms/login.html", form=form)
+    return render_template('forms/resetPassword.html', form=form, token=token)
 
-
-@app.route("/logout", methods=["GET"])
-@login_required
-def logout():
-  print current_user
-  logout_user()
-  return redirect(url_for('index'))
-
-
-@app.route('/forgotPassword')
+@app.route('/forgotPassword', methods=["GET", "POST"])
 def forgot_password():
+  token = request.args.get('token', None)
   form = ForgotForm(request.form)
+  if form.validate_on_submit():
+    email = form.email.data
+    user = Business.query.filter_by(email=email).first()
+    if user:
+      token = generate_confirmation_token(user.email)
+      recovery_url = url_for('reset_password', token=token, _external=True)
+      print "HI"+recovery_url
+      html = render_template('pages/recover.html', recovery_url=recovery_url)
+      subject = "Password reset requested"
+      sendConfirmationMail(user.email, subject, html)
+      flash('An email has been sent with link to reset password.', 'success')
+      return redirect(url_for("login"))
   return render_template('forms/forgot.html', form=form)
 
 

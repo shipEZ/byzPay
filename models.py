@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
 from app import db
 import bcrypt
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 engine = create_engine('sqlite:///database.db', echo=True)
 db_session = scoped_session(sessionmaker(autocommit=False,

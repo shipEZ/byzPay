@@ -1,8 +1,9 @@
 from flask_wtf import Form
 from wtforms import TextField, PasswordField, IntegerField, DateField
-from wtforms.validators import DataRequired, EqualTo, Length, Email
+from wtforms.validators import DataRequired, EqualTo, Length, Email, ValidationError
 from wtforms import validators
 from wtforms.fields.html5 import EmailField
+from models import *
 
 # Set your classes here.
 
@@ -81,7 +82,12 @@ class LoginForm(Form):
     email = TextField('Email', [DataRequired(), validators.Email("Please enter correct email address.")])
     password = PasswordField('Password', [DataRequired()])
 
+
 class ForgotForm(Form):
     email = TextField(
         'Email', validators=[DataRequired(), Length(min=6, max=40), validators.Email("Please enter correct email address.")]
     )
+
+class ResetPasswordSubmit(Form):
+    password = PasswordField('Password', validators=[validators.Required(), validators.EqualTo('confirm', message='Passwords must match')])
+    confirm = PasswordField('Confirm Password')
