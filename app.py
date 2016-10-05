@@ -117,9 +117,9 @@ def sendMail(invoiceDict):
       business = Business.query.filter_by(id=invoice.businessId).first()
       message = "You've received an invoice from %s at %s for a total amount of $ %s. " \
                 "Please pay this invoice by the due date of %s. " \
-                "Contact %s directly at %s for any questions." % (
+                "Contact %s directly at %s or via email at %s for any questions." % (
                 business.name, business.company, invoice.invoiceAmt, invoice.invoiceDueDate, business.name,
-                business.phone)
+                business.phone, business.email)
       subject = "Invoice received from %s for $%s" % (business.company, invoice.invoiceAmt)
       msg = Message(sender=app.config['MAIL_DEFAULT_SENDER'],
                     recipients=[invoice.clientEmail],
@@ -237,6 +237,7 @@ def display_result():
   returnedResult = request.args['result']
   if (returnedResult is not None):
     result = json.loads(str(returnedResult))
+    print result
     page = request.args.get('page', type=int, default=1)
     search = setSearchOption(request)
     pagination = Pagination(page=page, total=len(result), search=search, record_name='result')

@@ -8,8 +8,8 @@
     <table>
         {% for key, value in result.iteritems() %}
            <tr>
-                <td> {{ key }} </td>
-                <td> <a href="{{ url_for('static', filename='invoices/'+value) }}" style="text-decoration: underline;">{{ value }}</a> </td>
+                <td> {{ key }}  &nbsp;&nbsp;</td>
+                <td> <a href="{{ url_for('static', filename='invoices/'+current_user.name+'/'+value) }}" style="text-decoration: underline;">{{ value }}</a> </td>
            </tr>
         {% endfor %}
     </table>

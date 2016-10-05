@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63d9db46-523d-4d95-a6f8-fd007865efcc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/forms/resetPassword.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/pages/recover.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database.db" afterPath="$PROJECT_DIR$/database.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/forms.py" afterPath="$PROJECT_DIR$/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models.py" afterPath="$PROJECT_DIR$/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/forms/createLineInvoice.html" afterPath="$PROJECT_DIR$/templates/forms/createLineInvoice.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/forms/uploadFile.html" afterPath="$PROJECT_DIR$/templates/forms/uploadFile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/pages/activate.html" afterPath="$PROJECT_DIR$/templates/pages/activate.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/pages/printResult.html" afterPath="$PROJECT_DIR$/templates/pages/printResult.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/pages/recover.html" afterPath="$PROJECT_DIR$/templates/pages/recover.html" />
     </list>
     <ignored path="byzPay.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -73,20 +71,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/layouts/main.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="87" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="87" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
+            <state relative-caret-position="285">
               <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
@@ -99,10 +87,33 @@
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+              <caret line="120" column="81" selection-start-line="120" selection-start-column="81" selection-end-line="120" selection-end-column="81" />
               <folding>
                 <element signature="e#171#227#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="printResult.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/pages/printResult.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+              <folding>
+                <element signature="e#367#373#0" expanded="true" />
+                <element signature="e#373#379#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activate.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/pages/activate.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="11" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="15" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -122,18 +133,8 @@
       <file leaf-file-name="recover.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/pages/recover.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="43" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/layouts/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="87" selection-start-line="21" selection-start-column="87" selection-end-line="21" selection-end-column="87" />
+            <state relative-caret-position="0">
+              <caret line="0" column="3" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -159,13 +160,11 @@
         <option value="$PROJECT_DIR$/templates/pages/placeholder.about.html" />
         <option value="$PROJECT_DIR$/templates/forms/register.html" />
         <option value="$PROJECT_DIR$/invoice.py" />
-        <option value="$PROJECT_DIR$/templates/pages/printResult.html" />
         <option value="$PROJECT_DIR$/templates/forms/login.html" />
         <option value="$PROJECT_DIR$/static/bodybg/bg1.css" />
         <option value="$PROJECT_DIR$/templates/pages/index.html" />
         <option value="$PROJECT_DIR$/templates/forms/createBusiness.html" />
         <option value="$PROJECT_DIR$/templates/forms/forgot.html" />
-        <option value="$PROJECT_DIR$/templates/pages/activate.html" />
         <option value="$PROJECT_DIR$/token.py" />
         <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/templates/pages/dynamicDiscounting2.html" />
@@ -178,9 +177,11 @@
         <option value="$PROJECT_DIR$/models.py" />
         <option value="$PROJECT_DIR$/forms.py" />
         <option value="$PROJECT_DIR$/templates/forms/resetPassword.html" />
-        <option value="$PROJECT_DIR$/templates/pages/recover.html" />
         <option value="$PROJECT_DIR$/templates/forms/createLineInvoice.html" />
         <option value="$PROJECT_DIR$/templates/forms/uploadFile.html" />
+        <option value="$PROJECT_DIR$/templates/pages/activate.html" />
+        <option value="$PROJECT_DIR$/templates/pages/recover.html" />
+        <option value="$PROJECT_DIR$/templates/pages/printResult.html" />
         <option value="$PROJECT_DIR$/app.py" />
       </list>
     </option>
@@ -833,13 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/pages/printResult.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/forms/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -942,16 +936,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/forms/updateBusinessDetails.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -971,22 +955,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="96" selection-start-line="5" selection-start-column="96" selection-end-line="5" selection-end-column="96" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/pages/recover.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="43" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/pages/activate.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -1021,10 +989,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/pages/recover.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="3" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/pages/activate.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="11" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/pages/printResult.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+          <folding>
+            <element signature="e#367#373#0" expanded="true" />
+            <element signature="e#373#379#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
-          <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+          <caret line="120" column="81" selection-start-line="120" selection-start-column="81" selection-end-line="120" selection-end-column="81" />
           <folding>
             <element signature="e#171#227#0" expanded="true" />
           </folding>
