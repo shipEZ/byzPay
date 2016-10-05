@@ -1,3 +1,3 @@
-invoice no,client name,client email,client phone,item summary,item description,due date,amount
+Invoice Number,Client Name,Client Email,Client Phone,Item Summary,Item Description,Invoice Due Date,Invoice Amount
 1000,rutika,sachinas@ucsd.edu,8586667323,testInvoice,generic description,15 September,200
 1001,aviral,sachin.suryanarayana@bloomreach.com,8586667323,testInvoice,generic description,16 September,210

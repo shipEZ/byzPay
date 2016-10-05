@@ -1,11 +1,12 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Upload File{% endblock %}
 {% block content %}
-     <p>Upload your csv/tsv/xls/xlsx files below to create instant invoices. Youe excel table is expected to have the following column order:
-         <b>invoice no,client name,client email,client phone,item summary,item description,due date,invoice amount</b></p>
+     <p>Upload your csv/tsv/xls/xlsx files below to create instant invoices.</p>
          You can create individual line invoices via form <a href="{{ url_for('create_invoice_via_form') }}" style="text-decoration: underline">here</a>
     <br> <br>
     <h2>Create Invoices</h2>
+    Your excel table should have the following column order:<br>
+         Invoice Number, Client Name, Client Email, Client Phone, Item Summary, Item Description, Invoice Due Date, Invoice Amount
     <form action="" method=post enctype=multipart/form-data class="form">
         <h3 class="form-heading">Upload file <a href="{{ url_for('home') }}" title="Back to homepage"><i class="fa fa-home pull-right"></i></a></h3>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/><p>

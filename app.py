@@ -202,9 +202,15 @@ def redirect_url(default='index'):
 def create_invoice():
   if request.method == 'POST':
     excelContent = request.get_array(field_name='file')
-    invoiceDict = createInvoice(excelContent, current_user)
-    returnedInvoiceDict = sendMail(invoiceDict)
-    return redirect(url_for('display_result', result=json.dumps(returnedInvoiceDict)))
+    header=[str(x) for x in excelContent[0]]
+    line=["Invoice Number","Client Name","Client Email","Client Phone","Item Summary","Item Description","Invoice Due Date","Invoice Amount"]
+    if(header==line):
+      invoiceDict = createInvoice(excelContent, current_user)
+      returnedInvoiceDict = sendMail(invoiceDict)
+      return redirect(url_for('display_result', result=json.dumps(returnedInvoiceDict)))
+    else:
+      print header
+      flash("Correct your column order to the following - invoice no,client name,client email,client phone,item summary,item description,due date,invoice amount")
   return render_template('forms/uploadFile.html')
 
 @csrf.exempt
@@ -361,7 +367,7 @@ def index():
 
 @app.route('/ycdemo', methods=["GET", "POST"])
 def ycdemo():
-  user = Business.query.filter_by(email='sachinas@ucsd.edu').first()
+  user = Business.query.filter_by(email='YC@YC.com').first()
   login_user(user, remember=True)
   return redirect(request.args.get('next') or url_for('home'))
 
