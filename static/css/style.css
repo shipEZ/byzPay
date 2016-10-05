@@ -975,6 +975,10 @@ Buttons
   border-radius: 6px;
 }
 
+.btn {
+    background-color:#717171;
+    border-color:#F2F2F2;
+}
 /* =======================
 Elements
 ========================== */
