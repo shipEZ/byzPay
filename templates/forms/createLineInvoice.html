@@ -1,0 +1,21 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Create Line Invoice{% endblock %}
+{% block content %}
+  Use the form below to create individual invoice. You can create bulk invoice via excel/csv upload <a href="{{ url_for('create_invoice') }}" style="text-decoration: underline">here</a>
+  <form method="post" class="form">
+      {% if form.csrf_token.errors %}
+        <div class="warning">You have submitted an invalid CSRF token</div>
+    {% endif %}
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <h3 class="form-heading">Invoice Details <a href="{{ url_for('home') }}" title="Back to homepage"><i class="fa fa-home pull-right"></i></a></h3>
+    {{ form.invoiceNumber(class_ = 'form-control first-input', placeholder = form.invoiceNumber.label.text, required = true, autofocus = true) }}
+    {{ form.clientName(class_ = 'form-control first-input', placeholder = form.clientName.label.text, required = true, autofocus = true) }}
+    {{ form.clientEmail(class_ = 'form-control', placeholder = form.clientEmail.label.text, required = true) }}
+    {{ form.clientPhone(class_ = 'form-control', placeholder = form.clientPhone.label.text, required = true) }}
+    {{ form.itemSummary(class_ = 'form-control first-input', placeholder = form.itemSummary.label.text, required = true, autofocus = true) }}
+    {{ form.description(class_ = 'form-control last-input', placeholder = form.description.label.text) }}
+      {{ form.invoiceDueDate(class_ = 'form-control last-input', placeholder = form.invoiceDueDate.label.text, required = true) }}
+      {{ form.invoiceAmt(class_ = 'form-control last-input', placeholder = form.invoiceAmt.label.text, required = true) }}
+    <input type="submit" value="update details" class="btn btn-primary btn-lg btn-block" >
+  </form>
+{% endblock %}

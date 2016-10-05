@@ -67,8 +67,9 @@
             <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a href="{{ url_for('home') }}">Scribe Home</a></li>
           </ul>
           <ul class="nav navbar-nav pull-right">
-			  <li><a href="{{ url_for('update_business_details') }}">Update Details</a></li>
-			  <li><a href="{{ url_for('create_invoice') }}">Create Invoices</a></li>
+			  <li><a href="{{ url_for('update_business_details') }}">Update Account</a></li>
+			  <li><a href="{{ url_for('create_invoice') }}">Bulk Invoices</a></li>
+			  <li><a href="{{ url_for('create_invoice_via_form') }}">Line Invoices</a></li>
 			  <li><a href="{{ url_for('dynamic_discounting') }}">Dynamic Discounting</a></li>
 			  <li><a href="{{ url_for('logout') }}">logout</a></li>
           </ul>
