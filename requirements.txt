@@ -21,3 +21,4 @@ Flask-Excel
 jsonify
 Flask-Mail
 flask-paginate
+flask-security

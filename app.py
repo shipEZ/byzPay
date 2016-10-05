@@ -355,8 +355,9 @@ def forgot_password():
   form = ForgotForm(request.form)
   return render_template('forms/forgot.html', form=form)
 
-@login_required
+
 @app.route('/home', methods=["GET", "POST"])
+@login_required
 def home():
   return render_template('pages/home.html')
 
