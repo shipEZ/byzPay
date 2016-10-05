@@ -120,10 +120,11 @@ def sendMail(invoiceDict):
                 "Contact %s directly at %s or via email at %s for any questions." % (
                 business.name, business.company, invoice.invoiceAmt, invoice.invoiceDueDate, business.name,
                 business.phone, business.email)
+      html = render_template('pages/invoiceMail.html', business=business, invoice=invoice)
       subject = "Invoice received from %s for $%s" % (business.company, invoice.invoiceAmt)
       msg = Message(sender=app.config['MAIL_DEFAULT_SENDER'],
                     recipients=[invoice.clientEmail],
-                    body=message,
+                    html=html,
                     subject=subject)
       with app.open_resource(invoicePdf) as fp:
         msg.attach(invoicePdf, "application/pdf", fp.read())
