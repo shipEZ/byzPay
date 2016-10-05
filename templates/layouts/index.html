@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <title>Scribe - A one stop fast and efficient quote to cash for b2b markets</title>
-
+	<link rel="shortcut icon" href="{{ url_for('static', filename='ico/scribeFavicon.png') }}">
     <!-- css -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -59,7 +59,7 @@
 		</div>-->
 		<div class="collapse navbar-collapse"  style="background:#F2F2F2;">
           <ul class="nav navbar-nav">
-            <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a href="{{ url_for('index') }}">Scribe Home</a></li>
+			  <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a href="{{ url_for('index') }}">Scribe Home</a></li>
           </ul>
           <ul class="nav navbar-nav pull-right">
             <li><a href="{{ url_for('register') }}">Signup</a></li>

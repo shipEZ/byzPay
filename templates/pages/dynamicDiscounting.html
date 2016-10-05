@@ -7,31 +7,41 @@
     <table>
       <thead>
         <tr>
-          <th>Invoice #</th>
-          <th>Client Email</th>
-            <th>Invoice Amt</th>
-            <th>Invoice Due Date</th>
-            <th>Monthly Discount Rate(%)</th>
+          <th>Invoice #&nbsp;&nbsp;</th>
+          <th>Client Email&nbsp;&nbsp;</th>
+            <th>Invoice Amt&nbsp;&nbsp;</th>
+            <th>Invoice Due Date&nbsp;&nbsp;</th>
+            <th>Monthly Discount Rate(%)&nbsp;&nbsp;</th>
         </tr>
       </thead>
       <tbody>
         {% for invoice in invoices %}
           <tr>
-            <td>{{ invoice.invoiceNumber }}</td>
-            <td>{{ invoice.clientEmail }}</td>
-              <td>{{ invoice.invoiceAmt }}</td>
-            <td>{{ invoice.invoiceDueDate }}</td>
+            <td>{{ invoice.invoiceNumber }} &nbsp;</td>
+            <td>{{ invoice.clientEmail }}&nbsp;</td>
+              <td>{{ invoice.invoiceAmt }}&nbsp;</td>
+            <td>{{ invoice.invoiceDueDate }}&nbsp;</td>
               <form action="/dynamicDiscounting" method="POST">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <td><input type="range" id="discount" name="discount"  value="10" min="0" max="100"><output for="discount" onforminput="value = discount.valueAsNumber;"></output>
+
+            <td><input type="range" id="discount" name="discount"  value="10" min="0" max="100">
+                <output for="discount" onforminput="value = discount.valueAsNumber;"></output>
                 <input type="hidden" id="invoiceId" name="invoiceId" value="{{ invoice.invoiceNumber }}"></td>
-            <td><input type="submit" name="my-form" id="sendDiscount2" value="Send Discount"></td>
+            <td><input type="submit" name="my-form" id="sendDiscount2" value="Send Discount">&nbsp;</td>
             </form>
           </tr>
         {% endfor %}
       </tbody>
     </table>
     {{ pagination.links }}
+    <script type="text/javascript">
+        $('#slider').range2DSlider({
+          value:[[1,0],[5,0]],//will be two sliders
+          showRanges:[[0,1]],   //combine these two sliders
+          template:'horizontal' //this is not setting a configuration setting
+          //to simplify the work with the plugin
+        });
+    </script>
     <script type="text/javascript">
         $(function() {
 		 var el, newPoint, newPlace, offset;
