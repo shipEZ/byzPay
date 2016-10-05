@@ -1,0 +1,14 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <p style="margin-left:20px; margin-right:20px">
+     Hi {{ current_user.name }},<br>
+
+        Welcome to Scribe. Use our service to create and send instant e-invoices, provide dynamic discounts and keep track
+of your invoices, all in one place. You can send bulk invoices <a href="{{ url_for('create_invoice') }}" style="text-decoration:underline">here</a>
+or send individual invoice via form <a href="{{ url_for('create_invoice_via_form') }}" style="text-decoration:underline">here</a> <br>
+<br>
+You can send discounted invoice offers <a href="{{ url_for('dynamic_discounting') }}" style="text-decoration:underline">here</a>
+</p>
+
+{% endblock %}

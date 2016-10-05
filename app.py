@@ -326,7 +326,7 @@ def login():
       if bcrypt.hashpw(form.password.data.encode('utf-8'), user.password.encode('utf-8')) == user.password.encode(
           'utf-8'):
         login_user(user, remember=True)
-        return redirect(request.args.get('next') or url_for('create_invoice'))
+        return redirect(request.args.get('next') or url_for('home'))
       else:
         flash('Username or Password is invalid', 'error')
         return redirect(url_for('login'))
@@ -349,16 +349,21 @@ def forgot_password():
   form = ForgotForm(request.form)
   return render_template('forms/forgot.html', form=form)
 
-
-@app.route('/', methods=["GET", "POST"])
+@login_required
+@app.route('/home', methods=["GET", "POST"])
 def home():
-  return render_template('pages/index.html')
+  return render_template('pages/home.html')
 
 
 @app.route('/', methods=["GET", "POST"])
 def index():
   return render_template('pages/index.html')
 
+@app.route('/ycdemo', methods=["GET", "POST"])
+def ycdemo():
+  user = Business.query.filter_by(email='sachinas@ucsd.edu').first()
+  login_user(user, remember=True)
+  return redirect(request.args.get('next') or url_for('home'))
 
 @app.route('/about')
 def about():
