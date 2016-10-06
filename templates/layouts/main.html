@@ -1,68 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Scribe - A one stop fast and efficient quote to cash for b2b markets</title>
-	<link rel="shortcut icon" href="{{ url_for('static', filename='ico/scribeFavicon.png') }}">
-    <!-- css -->
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="/static/plugins/cubeportfolio/css/cubeportfolio.min.css">
-	<link href="/static/css/nivo-lightbox.css" rel="stylesheet" />
-	<link href="/static/css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
-	<link href="/static/css/owl.carousel.css" rel="stylesheet" media="screen" />
-    <link href="/static/css/owl.theme.css" rel="stylesheet" media="screen" />
-	<link href="/static/css/animate.css" rel="stylesheet" />
-	<link href="/static/css/style.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/static/css/netdna.bootstrap.min.css">
-	<style>
-		.btn {
-			background-color:#666666;
-		}
-		a{
-		color:#666666;
-		}
-		h5{
-			font:12px;
-		}
-		h4{
-			font:14px;
-		}
-	</style>
-	<!-- boxed bg -->
-	<link id="bodybg" href="/static/bodybg/bg1.css" rel="stylesheet" type="text/css" />
-	<!-- template skin -->
-	<link id="t-colors" href="/static/color/default.css" rel="stylesheet">
-
-	<!-- Core JavaScript Files -->
-    <script src="/static/js/jquery.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/jquery.easing.min.js"></script>
-	<script src="/static/js/wow.min.js"></script>
-	<script src="/static/js/jquery.scrollTo.js"></script>
-	<script src="/static/js/jquery.appear.js"></script>
-	<script src="/static/js/stellar.js"></script>
-	<script src="/static/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
-	<script src="/static/js/owl.carousel.min.js"></script>
-	<script src="/static/js/nivo-lightbox.min.js"></script>
-    <script src="/static/js/custom.js"></script>
-
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script type="text/javascript" src="/static/js/libs/jquery-1.11.1.min.js"><\/script>')</script>
-	<script type="text/javascript" src="/static/js/libs/bootstrap-3.1.1.min.js" defer></script>
-	<script type="text/javascript" src="/static/js/plugins.js" defer></script>
-	<link rel="stylesheet" type="text/css" href="jquery.range2dslider.css"/>;
-    <script src="jquery.range2dslider.js"></script>
-	<script type="text/javascript" src="/static/js/script.js" defer></script>
-
-	<!-- jscript -->
-</head>
-
+{% include 'layouts/header.html' %}
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 
 <div id="wrapper">
@@ -79,17 +17,18 @@
 				</div>
 			</div>
 		</div>-->
-		<div class="collapse navbar-collapse" style="background:#F2F2F2;">
+		<div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a href="{{ url_for('home') }}">Scribe Home</a></li>
           </ul>
           <ul class="nav navbar-nav pull-right">
 			  <li><a href="{{ url_for('update_business_details') }}">Update Account</a></li>
 			  <li class="dropdown">
-				  <a class="dropdown-toggle" data-toggle="dropdown">Create Invoices <b class="caret"></b></a>
+				  <a class="dropdown-toggle" data-toggle="dropdown">Invoice Management <b class="caret"></b></a>
 				  <ul class="dropdown-menu">
-					<li><a href="{{ url_for('create_invoice') }}">Bulk Invoices</a></li>
-				  	<li><a href="{{ url_for('create_invoice_via_form') }}">Line Invoices</a></li>
+					<li><a href="{{ url_for('create_invoice') }}">Send Bulk Invoices</a></li>
+				  	<li><a href="{{ url_for('create_invoice_via_form') }}">Send Line Invoice</a></li>
+					  <li><a href="{{ url_for('sent_invoices') }}">Sent Invoices</a></li>
 				  </ul>
 			  </li>
 			  <li><a href="{{ url_for('dynamic_discounting') }}">Dynamic Discounting</a></li>
@@ -187,20 +126,7 @@
 
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
-	<!-- Google Analytics - Change UA-XXXXX-X to be your site's ID -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-35342060-2', 'auto');
-      ga('send', 'pageview');
-
-    </script>
+{% include 'layouts/footer.html' %}
 </body>
 
 </html>

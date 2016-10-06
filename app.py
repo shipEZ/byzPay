@@ -9,9 +9,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CsrfProtect
 import logging
 from logging import Formatter, FileHandler
-from forms import *
-from models import *
-from invoice import *
 from itsdangerous import URLSafeTimedSerializer
 from datetime import datetime, date, timedelta
 from pyinvoice.models import InvoiceInfo, ServiceProviderInfo, ClientInfo, Item, Transaction
@@ -21,6 +18,10 @@ from flask import request
 import json, os, bcrypt
 from flask_mail import Mail, Message
 from flask_paginate import Pagination
+
+from forms import *
+from models import *
+from productSpecificFunctions import *
 
 # ----------------------------------------------------------------------------#
 # App Config.
@@ -77,20 +78,20 @@ def load_user(id):
     id = -1
   return Business.query.get(int(id))
 
-
 def createLineInvoice(line, current_user):
   invoiceNumber = str(line[0])
   invoiceDueDate = line[6]
   invoiceAmt = line[7]
   invoiceDesc = line[4]  # invoiceSummary i.e
-  doc = SimpleInvoice('invoice' + invoiceNumber + '.pdf')
-  doc.invoice_info = InvoiceInfo(line[0], datetime.now(),
-                                 invoiceDueDate)  # Invoice info - id, invoice date, invoice due date
   clientEmail = line[2]
-  doc.client_info = ClientInfo(email=clientEmail)
-  doc.add_item(Item(invoiceDesc, line[5], invoiceAmt, '0'))
   invoice = Invoice(invoiceNumber, clientEmail, current_user.id, invoiceAmt, invoiceDueDate, datetime.now(),
                     invoiceDesc)
+  db.session.add(invoice)
+  db.session.commit()
+  doc = SimpleInvoice('invoice' + str(invoice.id) + '.pdf')
+  doc.invoice_info = InvoiceInfo(line[0], datetime.now(),invoiceDueDate)
+  doc.client_info = ClientInfo(email=clientEmail)
+  doc.add_item(Item(invoiceDesc, line[5], invoiceAmt, '0'))
   doc.finish()
   return invoice
 
@@ -99,9 +100,7 @@ def createInvoice(excelContent, current_user):
   invoiceDict = {}
   for line in excelContent[1:]:
     invoice = createLineInvoice(line, current_user)
-    db.session.add(invoice)
-    db.session.commit()
-    invoiceDict['invoice' + str(line[0]) + '.pdf'] = invoice
+    invoiceDict['invoice' + str(invoice.id) + '.pdf'] = invoice
   return invoiceDict
 
 def sendReminder(invoiceDict):
@@ -146,13 +145,10 @@ def send_discount(request):
   invoiceNew = createLineInvoice(
     [invoice.invoiceNumber + "_discounted", "", invoice.clientEmail, "", invoice.invoiceDesc, "", invoiceDueDate,
      invoiceAmt], current_user)
-  db.session.add(invoiceNew)
-  db.session.commit()
   invoiceDict = {}
-  invoiceDict['invoice' + invoice.invoiceNumber + '_discounted.pdf'] = invoice
+  invoiceDict['invoice' + str(invoiceNew.id) + '.pdf'] = invoiceNew
   returnedInvoiceDict = sendMail(invoiceDict)
   return returnedInvoiceDict
-
 
 def sendConfirmationMail(to, subject, template):
   msg = Message(
@@ -264,6 +260,18 @@ def dynamic_discounting():
   return render_template('pages/dynamicDiscounting.html', title='Discounts!!', invoices=invoicesPerPage,
                          pagination=pagination)
 
+@app.route("/sentInvoices", methods=['GET', 'POST'])
+def sent_invoices():
+  invoices = Invoice.query.filter_by(businessId=current_user.id)
+  page = request.args.get('page', type=int, default=1)
+  search = setSearchOption(request)
+  ITEMS_PER_PAGE = 10
+  i = (page - 1) * ITEMS_PER_PAGE
+  invoicesPerPage = invoices[i:i + ITEMS_PER_PAGE]
+  pagination = Pagination(page=page, per_page=10, total=invoices.count(), search=search, record_name='invoices',
+                          css_framework='bootstrap3')
+  return render_template('pages/sentInvoices.html', invoices=invoicesPerPage,
+                         pagination=pagination)
 
 # ----------------------------------------------------------------------------#
 # Login,registration and other common controllers.

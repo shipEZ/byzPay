@@ -1,0 +1,30 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Sent Invoices{% endblock %}
+{% block content %}
+    Find below the invoices you have sent till now through Scribe
+    {{ pagination.info }}
+    {{ pagination.links }}
+    <table>
+      <thead>
+        <tr>
+          <th>Invoice #&nbsp;&nbsp;</th>
+          <th>Client Email&nbsp;&nbsp;</th>
+            <th>Invoice Amt&nbsp;&nbsp;</th>
+            <th>Invoice Due Date&nbsp;&nbsp;</th>
+            <th>View Invoices&nbsp;&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for invoice in invoices %}
+          <tr>
+            <td>{{ invoice.invoiceNumber }} &nbsp;</td>
+            <td>{{ invoice.clientEmail }}&nbsp;</td>
+              <td>{{ invoice.invoiceAmt }}&nbsp;</td>
+            <td>{{ invoice.invoiceDueDate }}&nbsp;</td>
+              <td><a href="{{ url_for('static', filename='invoices/'+current_user.name+'/invoice'+invoice.id|string+'.pdf') }}" style="text-decoration: underline">view Invoice</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {{ pagination.links }}
+{% endblock %}

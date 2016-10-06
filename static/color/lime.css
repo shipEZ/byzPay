@@ -3,7 +3,7 @@
 #2 color = #bcd43e;
 */
 
-a:hover,
+a:hover,.icon-success,
 a:focus {
     color: #C6DF45;
 }

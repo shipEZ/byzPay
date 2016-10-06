@@ -21,3 +21,9 @@ MAIL_USE_SSL = True
 
 # mail accounts
 MAIL_DEFAULT_SENDER = 'hi@tryscribe.com'
+
+#CSS color schemas
+#1 color = #4ACCD1;
+#2 color = #3fbbc0;
+#3 Default = ##4ACCD1;
+
