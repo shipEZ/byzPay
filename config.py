@@ -14,13 +14,13 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'database.db')
 #mail settings
 MAIL_SERVER='smtp.gmail.com' #smtp.zoho.com
 MAIL_PORT = 465
-MAIL_USERNAME = 'admin@tryscribe.com' #hi@tryscribe.com
+MAIL_USERNAME = 'hi@tryscribe.com' #hi@tryscribe.com
 MAIL_PASSWORD = os.environ['MAIL_PASSWORD'] #sachin99
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
 
 # mail accounts
-MAIL_DEFAULT_SENDER = 'admin@tryscribe.com'
+MAIL_DEFAULT_SENDER = 'hi@tryscribe.com'
 
 # Stripe test configs
 STRIPE_CLIENT_ID = 'ca_9KNKL89g9NkEqU0sunL2HuVZGSLdiBPD'
