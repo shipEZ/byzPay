@@ -8,7 +8,9 @@
 of your invoices, all in one <a href="{{ url_for('sent_invoices') }}" style="text-decoration:underline">place</a>. You can send bulk invoices <a href="{{ url_for('create_invoice') }}" style="text-decoration:underline">here</a>
 or send individual invoice via form <a href="{{ url_for('create_invoice_via_form') }}" style="text-decoration:underline">here</a> <br>
 <br>
-You can send discounted invoice offers <a href="{{ url_for('dynamic_discounting') }}" style="text-decoration:underline">here</a>
+You can send discounted invoice offers <a href="{{ url_for('dynamic_discounting') }}" style="text-decoration:underline">here</a><br>
 </p>
+<p><a class="stripe-connect" href="{{ url_for('stripe_authorize') }}">Connect via Stripe</a> to
+    integrate your payment collection with scribe</p>
 
 {% endblock %}

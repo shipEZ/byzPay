@@ -1,0 +1,15 @@
+{% extends 'layouts/index.html' %}
+{% block title %}Pay with Stripe{% endblock %}
+{% block content %}
+ <p> Hi {{ invoice.clientName }}</p>
+Please complete the payment by clicking the following button
+
+<form action="{{ url_for('stripe_charge') }}" id="pay_form" method="post">
+        <input type="hidden" id="invoiceAmt" name="invoiceAmt" value="{{ invoice.invoiceAmt }}">
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="{{ key }}" data-name="Scribe invoice payments" data-currency="usd"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto" data-zip-code="true" data-amount="{{ invoice.invoiceAmt|float*100 }}"
+                data-description="invoice payments"></script>
+</form>
+{% endblock %}

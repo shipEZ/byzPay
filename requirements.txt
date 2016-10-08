@@ -22,3 +22,5 @@ jsonify
 Flask-Mail
 flask-paginate
 flask-security
+Flask-Migrate
+stripe==1.19.1

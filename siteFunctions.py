@@ -1,5 +1,5 @@
+#Generic flask site functions
 
-#Invoice related functions
 from flask import Flask, render_template, flash, jsonify
 from flask import url_for, redirect
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
@@ -18,11 +18,9 @@ from flask_mail import Mail, Message
 from flask_paginate import Pagination
 from flask_migrate import Migrate
 import stripe
-from datetime import datetime, date, timedelta
-from pyinvoice.models import InvoiceInfo, ServiceProviderInfo, ClientInfo, Item, Transaction
-from pyinvoice.templates import SimpleInvoice
 
 from app import app, db
-from models import *
 mail = Mail(app)
+
+
 

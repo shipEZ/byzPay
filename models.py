@@ -33,9 +33,12 @@ class Business(Base):
     zipCode=db.Column(db.String(120))
     vatTaxNo=db.Column(db.String(120))
     logo=db.Column(db.String(120))
+    stripeToken=db.Column(db.String(120))
+    stripeUserId=db.Column(db.String(120))
 
     def __init__(self, name=None, company=None, email=None, password=None, phone=None, website=None,
-        street=None, city=None, state=None, country=None, zipCode=None, vatTaxNo=None, logo=None, authenticated=False):
+        street=None, city=None, state=None, country=None, zipCode=None, vatTaxNo=None, logo=None, stripeToken=None,
+                 stripeUserId=None, authenticated=False):
         self.name = name
         self.email = email
         self.company = company
@@ -49,6 +52,8 @@ class Business(Base):
         self.zipCode = zipCode
         self.vatTaxNo = vatTaxNo
         self.logo = logo
+        self.stripeToken = None
+        self.stripeUserId = None
         self.authenticated = authenticated
 
     def __repr__(self):
@@ -75,39 +80,31 @@ class Invoice(Base):
 
     id = db.Column(db.Integer, primary_key=True)
     invoiceNumber = db.Column(db.String(120))
+    clientName =  db.Column(db.String(120))
     clientEmail = db.Column(db.String(120))
     businessId = db.Column(db.String(30))
     invoiceAmt = db.Column(db.String(30))
     invoiceDueDate = db.Column(db.String(30))
     invoiceDate = db.Column(db.String(30))
     invoiceDesc = db.Column(db.String(30))
+    invoiceOpened = db.Column(db.Boolean, default=False)
+    invoicePaid = db.Column(db.Boolean, default=False)
 
-    def __init__(self, invoiceNumber=None, clientEmail=None, businessId=None, invoiceAmt=None, invoiceDueDate=None,
-                 invoiceDate=None,  invoiceDesc=None):
+    def __init__(self, invoiceNumber=None, clientName = None, clientEmail=None, businessId=None, invoiceAmt=None, invoiceDueDate=None,
+                 invoiceDate=None,  invoiceDesc=None, invoiceOpened=False, invoicePaid=False):
         self.invoiceNumber = invoiceNumber
+        self.clientName = clientName
         self.clientEmail = clientEmail
         self.businessId = businessId
         self.invoiceAmt = invoiceAmt
         self.invoiceDueDate = invoiceDueDate
         self.invoiceDate = invoiceDate
         self.invoiceDesc = invoiceDesc
+        self.invoiceOpened = invoiceOpened
+        self.invoicePaid = invoicePaid
 
     def __repr__(self):
         return "%d/%s/%s/%s" % (self.id, self.clientEmail, self.invoiceAmt, self.invoiceDueDate)
-
-'''
-class User(Base):
-    __tablename__ = 'Users'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True)
-    email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(30))
-
-    def __init__(self, name=None, password=None):
-        self.name = name
-        self.password = password
-'''
 
 # Create tables.
 Base.metadata.create_all(bind=engine)
