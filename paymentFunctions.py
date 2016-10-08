@@ -4,7 +4,15 @@ from models import *
 
 stripe.api_key = app.config['STRIPE_SECRET_KEY']
 
-def stripe_payment(stripe_token,stripe_email,connected_user_id,amount,current_user):
+def stripe_payment(stripe_token,stripe_email,connected_user_id,amount):
+  stripe.Charge.create(
+    amount=amount,
+    currency='usd',
+    source=stripe_token,
+    stripe_account=connected_user_id,
+    application_fee=0.1,
+  )
+  '''
     # Check if there is a Customer already created for this email
     platform_account_customers = stripe.Customer.list()
     platform_customer = [cus for cus in platform_account_customers if cus.email == stripe_email]
@@ -55,9 +63,9 @@ def stripe_payment(stripe_token,stripe_email,connected_user_id,amount,current_us
         # Amount is always in cents
         stripe.Charge.create(
             amount=amount,
-            currency='eur',
+            currency='usd',
             source=stripe_token,
             stripe_account=connected_user_id,
-            application_fee=1,
+            application_fee=0.1,
         )
-
+  '''

@@ -92,7 +92,7 @@ def stripe_charge():
     connected_user_id = current_user.stripeUserId
     amount = request.form.get('invoiceAmt')
     try:
-      stripe_payment(stripe_token, stripe_email, connected_user_id, amount, current_user)
+      stripe_payment(stripe_token, stripe_email, connected_user_id, amount)
     except Exception as e:
       print(repr(e))
       return render_template('error.html', error=repr(e))
