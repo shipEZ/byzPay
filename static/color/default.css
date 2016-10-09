@@ -23,7 +23,8 @@ a:focus {
 }
 
 .icon-success {
-    color: #7db53b;
+   ' color: #7db53b;'
+   color:#4ACCD1;
 }
 
 .circled {

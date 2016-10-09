@@ -10,16 +10,14 @@ from flask_wtf.csrf import CsrfProtect
 import logging
 from logging import Formatter, FileHandler
 from itsdangerous import URLSafeTimedSerializer
-from datetime import datetime, date, timedelta
-from pyinvoice.models import InvoiceInfo, ServiceProviderInfo, ClientInfo, Item, Transaction
+from datetime import datetime, timedelta
+from pyinvoice.models import InvoiceInfo, ClientInfo, Item
 from pyinvoice.templates import SimpleInvoice
-import flask_excel as excel
 from flask import request
-import json, os, bcrypt, urllib, requests
+import json, os, urllib, requests
 from flask_mail import Mail, Message
 from flask_paginate import Pagination
 from flask_migrate import Migrate
-import stripe
 
 # ----------------------------------------------------------------------------#
 # App Config.
@@ -479,7 +477,7 @@ def sendMail(invoiceDict):
       business = Business.query.filter_by(id=invoice.businessId).first()
       subject = "Invoice received from %s for $%s" % (business.company, invoice.invoiceAmt)
       if current_user.stripeToken is not None:
-        link = "http://localhost:5000/stripePayment?invoiceId="+str(invoice.id)
+        link = "http://tryscribe.com/stripePayment?invoiceId="+str(invoice.id)
         html = render_template('pages/invoiceMailWithPaymentLink.html', business=business, invoice=invoice,
                                key=app.config['STRIPE_PUBLISHABLE_KEY'], link=link)
       else:

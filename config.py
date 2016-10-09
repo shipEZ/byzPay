@@ -28,7 +28,8 @@ STRIPE_PUBLISHABLE_KEY = 'pk_test_dzO4Vz93tvnyjdYOxHEvBsQp'
 
 
 #CSS color schemas
-#1 color = #4ACCD1;
+#1 lavendarish = #4ACCD1;
 #2 color = #3fbbc0;
-#3 Default = ##4ACCD1;
+#3 Default = #4ACCD1;
+#4 orage = #FA482A
 
