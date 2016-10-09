@@ -1,16 +1,24 @@
 {% extends 'layouts/main.html' %}
 {% block title %}Home{% endblock %}
 {% block content %}
-    <p style="margin-left:20px; margin-right:20px">
-     Hi {{ current_user.name }},<br>
+    <div class="homeContainer">
+        <div class="floatLeft halfWidth" >
+            <form action="{{ url_for('stripe_authorize') }}">
+                <input type="submit" value="Integrate Payments via Stripe" class="btn btn-primary btn-lg btn-block" />
+            </form>
 
-        Welcome to Scribe. Use our service to create and send instant e-invoices, provide dynamic discounts and keep track
-of your invoices, all in one <a href="{{ url_for('sent_invoices') }}" style="text-decoration:underline">place</a>. You can send bulk invoices <a href="{{ url_for('create_invoice') }}" style="text-decoration:underline">here</a>
-or send individual invoice via form <a href="{{ url_for('create_invoice_via_form') }}" style="text-decoration:underline">here</a> <br>
-<br>
-You can send discounted invoice offers <a href="{{ url_for('dynamic_discounting') }}" style="text-decoration:underline">here</a><br>
-</p>
-<p><a class="stripe-connect" href="{{ url_for('stripe_authorize') }}">Connect via Stripe</a> to
-    integrate your payment collection with scribe</p>
+            <form action="{{ url_for('dynamic_discounting') }}">
+                <input type="submit" value="Send Invoice Discounts" class="btn btn-primary btn-lg btn-block" />
+            </form>
+        </div>
+        <div class="floatRight halfWidth">
+            <form action="{{ url_for('create_invoice') }}">
+            <input type="submit" value="Create Invoices" class="btn btn-primary btn-lg btn-block" />
+        </form>
 
+        <form action="{{ url_for('sent_invoices') }}">
+            <input type="submit" value="Sent Invoices" class="btn btn-primary btn-lg btn-block" />
+        </form>
+        </div>
+    </div>
 {% endblock %}

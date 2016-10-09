@@ -29,12 +29,12 @@
     </nav>
 </div>
 <!-- Begin page content -->
-<main id="content" role="main">
+<main id="content" role="main" style="min-height:60%">
 
   {% with messages = get_flashed_messages() %}
     {% if messages %}
       {% for message in messages %}
-        <div class="alert alert-block alert-error fade in">
+        <div class="alert alert-block alert-error fade in" style="color:#4ACCD1">
           <a class="close" data-dismiss="alert">&times;</a>
           {{ message }}
         </div>
