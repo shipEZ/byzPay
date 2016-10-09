@@ -3,6 +3,12 @@
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,600,700,800|Roboto:400,500,700,900');
 /* --- pe-icon-7-stroke --- */
 
+/*
+*{
+border: 1px solid red;
+}
+*/
+
 body {
     width: 100%;
     height: 100%;
@@ -50,6 +56,31 @@ tr,td,th {
     padding-right:10px;
 }
 
+/* ===========
+page styles
+============= */
+
+.homeContainer {
+    margin-left:20px;
+    margin-right:20px;
+}
+
+.halfWidth {
+    width:50%;
+    margin:auto;
+}
+
+.floatRight {
+    float:right;
+}
+
+.floatLeft {
+    float:left;
+}
+
+.underlineDecorator {
+    text-decoration:underline;
+}
 /* ===========
 Typo
 ============= */

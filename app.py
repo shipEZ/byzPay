@@ -6,6 +6,7 @@ from flask import Flask, render_template, flash, jsonify
 from flask import url_for, redirect
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
+import flask_excel as excel
 from flask_wtf.csrf import CsrfProtect
 import logging
 from logging import Formatter, FileHandler
@@ -152,11 +153,21 @@ def stripe_callback():
 # ----------------------------------------------------------------------------#
 '''
 
-
 @csrf.exempt
-@app.route("/uploadFile", methods=['GET', 'POST'])
+@app.route("/createInvoice", methods=['GET', 'POST'])
 @login_required
 def create_invoice():
+  form = CreateLineInvoice(request.form)
+  if form.validate_on_submit():
+    line = [form.data['invoiceNumber'], form.data['clientName'], form.data['clientEmail'], form.data['clientPhone'],
+            form.data['itemSummary'], form.data['description'], form.data['invoiceDueDate'], form.data['invoiceAmt']]
+    invoice = createLineInvoice(line, current_user)
+    db.session.add(invoice)
+    db.session.commit()
+    invoiceDict = {}
+    invoiceDict['invoice' + str(invoice.id) + '.pdf'] = invoice
+    returnedInvoiceDict = sendMail(invoiceDict)
+    return redirect(url_for('display_result', result=json.dumps(returnedInvoiceDict)))
   if request.method == 'POST':
     excelContent = request.get_array(field_name='file')
     header = [str(x) for x in excelContent[0]]
@@ -170,25 +181,7 @@ def create_invoice():
       print header
       flash(
         "Correct your column order to the following - invoice no,client name,client email,client phone,item summary,item description,due date,invoice amount")
-  return render_template('forms/uploadFile.html')
-
-
-@csrf.exempt
-@app.route("/createLineInvoice", methods=['GET', 'POST'])
-@login_required
-def create_invoice_via_form():
-  form = CreateLineInvoice(request.form)
-  if form.validate_on_submit():
-    line = [form.data['invoiceNumber'], form.data['clientName'], form.data['clientEmail'], form.data['clientPhone'],
-            form.data['itemSummary'], form.data['description'], form.data['invoiceDueDate'], form.data['invoiceAmt']]
-    invoice = createLineInvoice(line, current_user)
-    db.session.add(invoice)
-    db.session.commit()
-    invoiceDict = {}
-    invoiceDict['invoice' + str(line[0]) + '.pdf'] = invoice
-    returnedInvoiceDict = sendMail(invoiceDict)
-    return redirect(url_for('display_result', result=json.dumps(returnedInvoiceDict)))
-  return render_template('forms/createLineInvoice.html', form=form)
+  return render_template('forms/createInvoice.html', form=form)
 
 
 @csrf.exempt
@@ -482,7 +475,6 @@ def sendMail(invoiceDict):
                                key=app.config['STRIPE_PUBLISHABLE_KEY'], link=link)
       else:
         html = render_template('pages/invoiceMail.html', business=business, invoice=invoice)
-      print html
       msg = Message(sender=app.config['MAIL_DEFAULT_SENDER'],
                     recipients=[invoice.clientEmail],
                     html=html,
@@ -491,7 +483,6 @@ def sendMail(invoiceDict):
         msg.attach(invoicePdf, "application/pdf", fp.read())
       conn.send(msg)
       os.rename(invoicePdf, directory + invoicePdf)
-      print invoicePdf
       invoiceMailDict[invoice.clientEmail] = invoicePdf
   return invoiceMailDict
 
