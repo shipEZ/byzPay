@@ -373,7 +373,7 @@ def index():
 
 @app.route('/ycdemo', methods=["GET", "POST"])
 def ycdemo():
-  user = Business.query.filter_by(email='YC@YC.com').first()
+  user = Business.query.filter_by(email='yc@yc.com').first()
   login_user(user, remember=True)
   return redirect(request.args.get('next') or url_for('home'))
 
