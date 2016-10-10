@@ -81,6 +81,21 @@ page styles
 .underlineDecorator {
     text-decoration:underline;
 }
+
+
+@media (max-width: 780px) {
+    .floatRight{
+    float:none;
+    }
+
+    .floatLeft{
+        float:none;
+    }
+
+    .halfWidth{
+        width:80%;
+    }
+}
 /* ===========
 Typo
 ============= */
