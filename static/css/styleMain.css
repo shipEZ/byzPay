@@ -81,10 +81,8 @@ page styles
 .underlineDecorator {
     text-decoration:underline;
 }
-<<<<<<< HEAD
 
-
-@media (max-width: 780px) {
+@media (max-width: 780px, max-width: 767px, min-width: 992px, min-width: 1200px) {
     .floatRight{
     float:none;
     }
@@ -97,8 +95,7 @@ page styles
         width:80%;
     }
 }
-=======
->>>>>>> 524e1ed07430554257bdbaa7f9d9d00838545bb8
+
 /* ===========
 Typo
 ============= */
