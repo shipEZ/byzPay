@@ -35,10 +35,11 @@ class Business(Base):
     logo=db.Column(db.String(120))
     stripeToken=db.Column(db.String(120))
     stripeUserId=db.Column(db.String(120))
+    Enterprise=db.Column(db.Boolean, default=False)
 
     def __init__(self, name=None, company=None, email=None, password=None, phone=None, website=None,
         street=None, city=None, state=None, country=None, zipCode=None, vatTaxNo=None, logo=None, stripeToken=None,
-                 stripeUserId=None, authenticated=False):
+                 stripeUserId=None, authenticated=False, Enterprise=False):
         self.name = name
         self.email = email
         self.company = company
@@ -55,6 +56,7 @@ class Business(Base):
         self.stripeToken = None
         self.stripeUserId = None
         self.authenticated = authenticated
+        self.Enterprise = Enterprise
 
     def __repr__(self):
         return "%d/%s/%s" % (self.id, self.name, self.password)

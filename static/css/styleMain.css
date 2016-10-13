@@ -82,7 +82,7 @@ page styles
     text-decoration:underline;
 }
 
-@media (max-width: 780px, max-width: 767px, min-width: 992px, min-width: 1200px) {
+@media (max-width: 780px, max-width: 767px, max-width: 992px, max-width: 1200px) {
     .floatRight{
     float:none;
     }

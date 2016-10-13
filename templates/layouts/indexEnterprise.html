@@ -9,21 +9,21 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-6 col-md-6">
-					<p class="bold text-left">Monday - Saturday, 8am to 10pm </p>
+					<p class="bold text-left">Request a demo </p>
 					</div>
 					<div class="col-sm-6 col-md-6">
-					<p class="bold text-right">Call us now +62 008 65 001</p>
+					<p class="bold text-right">Call us now +1 8586667323</p>
 					</div>
 				</div>
 			</div>
 		</div>-->
 		<div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-			  <li {% if request.endpoint == 'home' %} class="active" {% endif %}><a href="{{ url_for('index') }}">Scribe Home</a></li>
+			  <li {% if request.endpoint =='home' %} class="active" {% endif %}><a href="{{ url_for('index_enterprise') }}">Scribe Home</a></li>
           </ul>
           <ul class="nav navbar-nav pull-right">
-            <li><a href="{{ url_for('register') }}">Signup</a></li>
-            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('index_supplier') }}">Scribe for Suppliers</a></li>
+            <li><a href="{{ url_for('request_demo') }}">Request a Demo</a></li>
           </ul>
         </div>
     </nav>
@@ -73,7 +73,7 @@
 					<div class="widget">
 						<h5>Contact us</h5>
 						<p>
-						Contact us over email at support@tryscribe.com or over phone at +1-8586667323
+						Contact us over email at support@tryscribe.com or over phone at +1-4157469935
 						</p>
 					</div>
 				</div>

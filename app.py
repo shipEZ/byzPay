@@ -264,7 +264,7 @@ def login():
 def logout():
   print current_user
   logout_user()
-  return redirect(url_for('index'))
+  return redirect(url_for('index_supplier'))
 
 
 @app.route('/createBusiness', methods=["GET", "POST"])
@@ -365,11 +365,28 @@ def forgot_password():
 def home():
   return render_template('pages/home.html')
 
+@app.route('/supplier', methods=["GET", "POST"])
+def index_supplier():
+  return render_template('pages/indexSupplier.html')
+
+@app.route('/enterprise', methods=["GET", "POST"])
+def index_enterprise():
+  return render_template('pages/indexEnterprise.html')
+
+@app.route('/requestDemo', methods=["GET", "POST"])
+def request_demo():
+  form = RequestDemo(request.form)
+  if form.validate_on_submit():
+    enterprise = Business(form.data['name'], "",form.data['email'],"", form.data['phone'])
+    db.session.add(enterprise)
+    db.session.commit()
+    flash("Thanks for your interest! We'll be in touch soon", 'success')
+    #return redirect(url_for("login"))
+  return render_template('forms/requestDemo.html', form=form)
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-  return render_template('pages/index.html')
-
+  return redirect(url_for('index_enterprise'))
 
 @app.route('/ycdemo', methods=["GET", "POST"])
 def ycdemo():
@@ -380,7 +397,7 @@ def ycdemo():
 
 @app.route('/about')
 def about():
-  return render_template('pages/index.html')
+  return render_template('pages/indexSupplier.html')
 
 
 @app.route('/register')

@@ -91,3 +91,16 @@ class ForgotForm(Form):
 class ResetPasswordSubmit(Form):
     password = PasswordField('Password', validators=[validators.Required(), validators.EqualTo('confirm', message='Passwords must match')])
     confirm = PasswordField('Confirm Password')
+
+
+class RequestDemo(Form):
+    name = TextField(
+        'Name', validators=[DataRequired(message="Please enter your name"), Length(min=1, max=25)]
+    )
+    email = EmailField(
+        'Email id', validators=[DataRequired(message="Please enter your email address"),
+                                validators.Email("Please enter correct email address.")]
+    )
+    phone = IntegerField(
+        'phone no', validators=[DataRequired(message="Please enter your phone number")]
+    )

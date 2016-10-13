@@ -1,4 +1,4 @@
-{% extends 'layouts/index.html' %}
+{% extends 'layouts/indexEnterprise.html' %}
 {% block content %}
 
 	<!-- Section: intro -->
@@ -11,15 +11,15 @@
 					<h2 class="h-ultra">Scribe</h2>
 					</div>
 					<div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
-					<h4 class="h-light">Integrated solution to <span class="color">improve your cash flow</span> after closing a sale!</h4>
+					<h4 class="h-light"><span class="color">Financing</span> for all your suppliers!</h4>
 					</div>
 						<div class="well well-trans">
 						<div class="wow fadeInRight" data-wow-delay="0.1s">
 
 						<ul class="lead-list">
-							<li><span class="fa fa-check fa-2x icon-success"></span><span class="list"><strong>Instant Invoice Creation</strong><br />Create elegant, legally binding invoices in less than 60 seconds</span></li>
-							<li><span class="fa fa-check fa-2x icon-success"></span><span class="list"><strong>Dynamic Discounting for Early Payment</strong><br />Use our technology to take back control of your working capital</span></li>
-							<li><span class="fa fa-check fa-2x icon-success"></span><span class="list"><strong>Payment & Tracking</strong><br />Get paid instantly and track when your invoices are seen </span></li>
+							<li><span class="fa fa-check fa-2x icon-success"></span><span class="list"><strong>Strengthen supplier relationships</strong><br /> by offering discounts in exchange for early payment</span></li>
+							<li><span class="fa fa-check fa-2x icon-success"></span><span class="list">Extend payment terms by using <strong>3rd party financing</strong><br /> to pay suppliers early</span></li>
+							<!--<li><span class="fa fa-check fa-2x icon-success"></span><span class="list"><strong>Payment & Tracking</strong><br />Get paid instantly and track when your invoices are seen </span></li>-->
 						</ul>
 
 						</div>
@@ -34,9 +34,8 @@
 							<div class="panel-heading" style="padding-bottom:12px;">
 									<h3 class="panel-title"><span class="fa fa-pencil-square-o"></span> Sign up today for free tier access <!--<small>(It's free!)</small>--></h3>
 									</div>
-									<div class="panel-body">
-										<a href="{{ url_for('login') }}" class="btn btn-skin btn-block btn-lg">Sign in</a>
-										<a href="{{ url_for('register') }}" class="btn btn-skin btn-block btn-lg">Sign up</a>
+									<div class="panel-body"> <!-- create the request form here itself -->
+										<a href="{{ url_for('request_demo') }}" class="btn btn-skin btn-block btn-lg">Request a demo</a>
 										<!--
 									<form role="form" class="lead">
 										<div class="row">
@@ -107,20 +106,8 @@
 						<span class="fa fa-stethoscope fa-3x"></span> 
 					</div>
 					<div class="service-desc">
-						<h5 class="h-light">Generate Contracts in minutes</h5>
-						<p>With few inputs from your side, we make contract generation absolutely seamless and instant. As it should be</p>
-					</div>
-                </div>
-				</div>
-				
-				<div class="wow fadeInRight" data-wow-delay="0.2s">
-				<div class="service-box">
-					<div class="service-icon" style="display:none">
-						<span class="fa fa-filter fa-3x"></span> 
-					</div>
-					<div class="service-desc">
-						<h5 class="h-light">Easy invoice and payment tracking</h5>
-						<p>We track the payment status of your invoices and send automated scheduled reminders, so that you dont have to </p>
+						<h5 class="h-light">Dynamic Discounting</h5>
+						<p>Time-based sliding scale or ad-hoc discounting of all invoices</p>
 					</div>
                 </div>
 				</div>
@@ -135,20 +122,8 @@
 						<span class="fa fa-h-square fa-3x"></span> 
 					</div>
 					<div class="service-desc">
-						<h5 class="h-light">Dynamic discounting</h5>
-						<p>Define your discount terms and send sms reminders to your clients with your updated offers. Working capital shouldn't be a concern</p>
-					</div>
-                </div>
-				</div>
-				
-				<div class="wow fadeInRight" data-wow-delay="0.3s">
-				<div class="service-box">
-					<div class="service-icon" style="display:none">
-						<span class="fa fa-plus-square fa-3x"></span> 
-					</div>
-					<div class="service-desc">
-						<h5 class="h-light">Integrated payments</h5>
-						<p>Be it credit card, debit card, net banking or ACH payments, we have it covered for you</p>
+						<h5 class="h-light">Automated Audit Engine</h5>
+						<p>Our AI algorithms reduce the time to audit invoices by 90% enabling you to capture greater time-based discounts</p>
 					</div>
                 </div>
 				</div>
@@ -162,19 +137,8 @@
 						<span class="fa fa-wheelchair fa-3x"></span> 
 					</div>
 					<div class="service-desc">
-						<h5 class="h-light">Batch invoice generation</h5>
-						<p>Upload csvs and generate invoices in batches and keep track of them. All in one place</p>
-					</div>
-                </div>
-				</div>
-				<div class="wow fadeInRight" data-wow-delay="0.3s">
-				<div class="service-box">
-					<div class="service-icon" style="display:none">
-						<span class="fa fa-user-md fa-3x"></span> 
-					</div>
-					<div class="service-desc">
-						<h5 class="h-light">Automated invoice auditing</h5>
-						<p>Our AI algorithms will ensure invoice payment correctness so that you can focus on growing your company</p>
+						<h5 class="h-light">3rd Party Financing</h5>
+						<p>Platform for 3rd parties to immediately access a pool of approved, low risk supplier invoices</p>
 					</div>
                 </div>
 				</div>

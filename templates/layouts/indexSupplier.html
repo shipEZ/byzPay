@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'layouts/header.html' %}
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+<div id="wrapper">
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<!--<div class="top-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6 col-md-6">
+					<p class="bold text-left">Monday - Saturday, 8am to 10pm </p>
+					</div>
+					<div class="col-sm-6 col-md-6">
+					<p class="bold text-right">Call us now +62 008 65 001</p>
+					</div>
+				</div>
+			</div>
+		</div>-->
+		<div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+			  <li {% if request.endpoint =='home' %} class="active" {% endif %}><a href="{{ url_for('index_supplier') }}">Scribe Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav pull-right">
+			  <li><a href="{{ url_for('index_enterprise') }}">Scribe for Enterprises</a></li>
+            <li><a href="{{ url_for('register') }}">Signup</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+          </ul>
+        </div>
+    </nav>
+</div>
+<!-- Begin page content -->
+<main id="content" role="main" style="min-height:60%">
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-block alert-error fade in" style="color:#4ACCD1">
+          <a class="close" data-dismiss="alert">&times;</a>
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</main>
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-md-4">
+				<div class="wow fadeInDown" data-wow-delay="0.1s">
+					<div class="widget">
+						<h5>About Scribe</h5>
+						<p>
+						We are building a platform that will improve the cash flow for your business. Interested in learning how we do this?
+						</p>
+					</div>
+				</div>
+				<div class="wow fadeInDown" data-wow-delay="0.1s">
+				<!--<div class="widget">
+					<h5>Information</h5>
+					<ul>
+						<li><a href="#">Home</a></li>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Features</a></li>
+						<li><a href="#">Pricing</a></li>
+					</ul>
+				</div>-->
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="wow fadeInDown" data-wow-delay="0.1s">
+					<div class="widget">
+						<h5>Contact us</h5>
+						<p>
+						Contact us over email at support@tryscribe.com or over phone at +1-8586667323
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4">
+				<div class="wow fadeInDown" data-wow-delay="0.1s">
+					<div class="widget">
+						<h5>Our location</h5>
+						<p>450 Townsend, san Francisco, CA - 94107</p>
+					</div>
+				</div>
+				<!--<div class="wow fadeInDown" data-wow-delay="0.1s">
+					<div class="widget">
+						<h5>Follow us</h5>
+						<ul class="company-social">
+							<li class="social-facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li class="social-twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li class="social-google"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							<li class="social-vimeo"><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+							<li class="social-dribble"><a href="#"><i class="fa fa-dribbble"></i></a></li>
+						</ul>
+					</div>
+				</div>-->
+			</div>
+		</div>
+	</div>
+	<div class="sub-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-md-6 col-lg-6">
+					<div class="wow fadeInLeft" data-wow-delay="0.1s">
+					<div class="text-left">
+					<p>&copy;Copyright 2016 - Scribe, All rights reserved.</p>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+{% include 'layouts/footer.html' %}
+
+</body>
+
+</html>
