@@ -17,6 +17,13 @@ a:focus {
     background-color:#F2F2F2;
 }
 
+.navbar.navbar-custom {
+    background-color:#F2F2F2;
+}
+
+ul.topnav li a {
+    color:#666;
+}
 .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover,
 .pagination>.active>a:focus, .pagination>.active>span:focus{
     background-color:#4ACCD1;

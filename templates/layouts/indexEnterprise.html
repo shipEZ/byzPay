@@ -4,30 +4,24 @@
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 
 <div id="wrapper">
-	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-		<!--<div class="top-area">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6 col-md-6">
-					<p class="bold text-left">Request a demo </p>
-					</div>
-					<div class="col-sm-6 col-md-6">
-					<p class="bold text-right">Call us now +1 8586667323</p>
-					</div>
-				</div>
+	<nav class="navbar navbar-custom navbar-fixed-top" >
+        <div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					☰
+				</button>
+				<ul class="nav navbar-brand">
+					<li><a href="{{ url_for('index_enterprise') }}">Scribe Home</a></li>
+				</ul>
 			</div>
-		</div>-->
-		<div>
-          <ul class="nav topnav">
-			  <li {% if request.endpoint =='home' %} class="active" {% endif %}><a href="{{ url_for('index_enterprise') }}">Scribe Home</a></li>
-          </ul>
-          <ul class="nav topnav pull-right" id="topNav">
-            <li><a href="{{ url_for('index_supplier') }}">Scribe for Suppliers</a></li>
-            <li><a href="{{ url_for('request_demo') }}">Request a Demo</a></li>
-			<li class="icon"><a href="javascript:void(0);" onclick="myFunction()">☰</a></li>
-          </ul>
-        </div>
-    </nav>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-right">
+              <li><a href="{{ url_for('index_supplier') }}">Scribe for Suppliers</a></li>
+				<li><a href="{{ url_for('request_demo') }}">Request Demo</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
 </div>
 <!-- Begin page content -->
 <main id="content" role="main" style="min-height:60%">
@@ -51,9 +45,9 @@
 			<div class="col-sm-6 col-md-4">
 				<div class="wow fadeInDown" data-wow-delay="0.1s">
 					<div class="widget">
-						<h5>Contact us</h5>
+						<h5>About Scribe</h5>
 						<p>
-						Contact us at support@tryscribe.com or phone at +1-4157469935
+							We are San Francisco Tech startup with the aim to revolutionize invoice financing. Interested in learning how we do this?
 						</p>
 					</div>
 				</div>
@@ -70,14 +64,14 @@
 				</div>-->
 			</div>
 			<div class="col-sm-6 col-md-4">
-				<!--<div class="wow fadeInDown" data-wow-delay="0.1s">
+				<div class="wow fadeInDown" data-wow-delay="0.1s">
 					<div class="widget">
-						<h5>About Scribe</h5>
+						<h5>Contact us</h5>
 						<p>
-							We are San Francisco Tech startup with the aim to revolutionize invoice financing. Interested in learning how we do this?
+						Contact us at support@tryscribe.com or phone at +1-4157469935
 						</p>
 					</div>
-				</div>-->
+				</div>
 			</div>
 			<div class="col-sm-6 col-md-4">
 				<div class="wow fadeInDown" data-wow-delay="0.1s">

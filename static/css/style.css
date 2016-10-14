@@ -1244,12 +1244,6 @@ Testimonial
 /* Media queries */
 
 @media (min-width: 768px) and (max-width: 979px) {
-	.navbar-brand {
-		float: none;
-		display: block;
-		margin: 0 auto;
-		width: 100%;
-	}
 	.intro-content {
 		padding:250px 0 0;
 	}
@@ -1261,39 +1255,13 @@ Testimonial
 	.top-area p {
 		text-align: center;
 	}
-	
-	.navbar.navbar-custom.navbar-fixed-top {
-		background: #f2f2f2;
-	}
 
-	.navbar-collapse {
-	    background:#F2F2F2;
-	}
 	.badge.custom-badge {
 		margin: 0 0 0 0;
 	}
-	
-	.navbar-header button {
-		border-color: #ccc;
-		background-color: #eee;
-		padding: 5px 20px;
-	}
-	.navbar-header i{
-		color: #666;
-	}
-	
+
 	.boxes3 {
 	width: 100%;
-	}
-	.navbar-custom ul.nav li {
-		border-bottom: 1px solid #eee;
-	}
-	.navbar-custom ul.nav li:last-child {
-		padding-bottom:0;
-	}
-	.navbar-custom ul.nav ul.dropdown-menu li {
-		border-bottom: 1px solid #eee;
-		padding-left: 20px;
 	}
 	
 	.service-box {
@@ -1337,19 +1305,6 @@ Testimonial
 
 @media (max-width:480px) {
 
-
-	.navbar-custom .nav.navbar-nav {
-    background-color: rgba(255,255,255,.4);
-	}
-	
-	.navbar.navbar-custom.navbar-fixed-top {
-		margin-bottom: 30px;
-	}
-	
-
-	
-
-
 	.box {
 		padding: 45px;
 	}
@@ -1361,12 +1316,6 @@ Testimonial
 }
 
 @media (max-width:320px) {
-	.navbar-brand {
-		text-align: center;
-		display: block;
-		margin: 0 auto;
-	}
-	
 	.intro-content {
 		padding:250px 0 0;
 	}

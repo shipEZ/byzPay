@@ -56,63 +56,6 @@ tr,td,th {
     padding-right:10px;
 }
 
-/*
-responsive navigation bar
-*/
-
-ul.topnav {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-/* Float the list items side by side */
-ul.topnav li {float: left;}
-
-/* Style the links inside the list items */
-ul.topnav li a {
-    display: inline-block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    transition: 0.3s;
-    font-size: 17px;
-}
-
-/* Change background color of links on hover */
-ul.topnav li a:hover {background-color: #555;}
-
-/* Hide the list item that contains the link that should open and close the topnav on small screens */
-ul.topnav li.icon {display: none;}
-
-/* When the screen is less than 680 pixels wide, hide all list items, except for the first one ("Home"). Show the list item that contains the link to open and close the topnav (li.icon) */
-@media screen and (max-width:680px) {
-  ul.topnav li:not(:first-child) {display: none;}
-  ul.topnav li.icon {
-    float: right;
-    display: inline-block;
-  }
-}
-
-/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens */
-@media screen and (max-width:680px) {
-  ul.topnav.responsive {position: relative;}
-  ul.topnav.responsive li.icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  ul.topnav.responsive li {
-    float: none;
-    display: inline;
-  }
-  ul.topnav.responsive li a {
-    display: block;
-    text-align: left;
-  }
-}
 /* ===========
 page styles
 ============= */
@@ -139,7 +82,7 @@ page styles
     text-decoration:underline;
 }
 
-@media (max-width: 780px, max-width: 767px, max-width: 992px, max-width: 1200px) {
+@media (max-width: 780px) {
     .floatRight{
     float:none;
     }
@@ -346,12 +289,6 @@ Top area
 Navigation
 ============= */
 
-.navbar-brand {
-  padding-top: 15px;
-  margin-top: 5px;
-  padding-bottom: 0;
-}
-
 .navbar-brand.reduce {
 	margin-top:0;
   padding-top: 5px;
@@ -378,14 +315,11 @@ Navigation
 
 }
 
-
 .navbar {
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255,255,255,.3);
 
 }
-
-
 
 .navbar-brand {
     font-weight: 700;
@@ -395,11 +329,7 @@ Navigation
     outline: 0;
 }
 
-.navbar.navbar-custom.navbar-fixed-top  {
-	background: #fff;
-}
-
-.navbar-custom.top-nav-collapse .nav.navbar-nav {
+.navbar-custom.top-nav-collapse .nav.topnav {
     background-color: rgba(0,0,0,0);
 }
 
@@ -407,13 +337,13 @@ Navigation
 	padding-top: 0;
 }
 
-.navbar.navbar-custom ul.nav.navbar-nav {
+.navbar.navbar-custom ul.nav.topnav {
 	margin-top: 15px;
  	-webkit-transition: all .4s ease-in-out;
     -moz-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
 }
-.navbar.navbar-custom.top-nav-collapse ul.nav.navbar-nav {
+.navbar.navbar-custom.top-nav-collapse ul.nav.topnav {
 	margin-top: 0;
  	-webkit-transition: all .4s ease-in-out;
     -moz-transition: all .4s ease-in-out;
@@ -421,18 +351,24 @@ Navigation
 }
 
 .navbar-custom ul.nav li a {
-	font-size: 13px;
+	font-size: 14px;
 	letter-spacing: 1px;
     color: #666;
 	text-transform: uppercase;
 	font-weight: 700;
 	background: transparent;
+	padding-top:20px;
 }
 
 
-.navbar.navbar-custom.top-nav-collapse {
-	background: #fff;
+.navbar-brand {
+  padding-top: 15px;
+  margin-top: 5px;
+  padding-bottom: 0;
+}
 
+.navbar-custom ul.navbar-brand li a {
+    padding-top: 0px;
 }
 
 .navbar.navbar-custom.top-nav-collapse .navigation {
@@ -467,7 +403,7 @@ Navigation
 }
 
 .navbar-custom ul.nav ul.dropdown-menu li a:hover {
-	background: #fefefe;
+	background: #f2f2f2;
 }
 
 .navbar-custom.top-nav-collapse ul.nav ul.dropdown-menu li a {
@@ -480,31 +416,9 @@ Navigation
     transition: background .3s ease-in-out;
 }
 
-
-
-.navbar-custom.navbar-fixed-top .nav li a:hover,
-.navbar-custom.navbar-fixed-top .nav li a:focus,
-.navbar-custom.navbar-fixed-top .nav li.active a,
-.navbar-custom.navbar-fixed-top .nav li.active {
-    outline: 0;
-	background: none;
-}
-.navbar-custom.top-nav-collapse .nav li a:hover,
-.navbar-custom.top-nav-collapse .nav li a:focus,
-.navbar-custom.top-nav-collapse .nav li.active {
-    outline: 0;
-    background-color: rgba(255,255,255,.2);
-}
-
 .navbar-toggle {
     padding: 4px 6px;
     font-size: 14px;
-    color: #fff;
-}
-
-.navbar-toggle:focus,
-.navbar-toggle:active {
-    outline: 0;
 }
 
 /* ===========================
