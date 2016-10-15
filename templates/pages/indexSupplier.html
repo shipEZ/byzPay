@@ -2,7 +2,7 @@
 {% block content %}
 
 	<!-- Section: intro -->
-    <section id="intro" class="intro">
+    <section id="intro" class="intro thickBottomBorder">
 		<div class="intro-content">
 			<div class="container">
 				<div class="row">
@@ -37,43 +37,6 @@
 									<div class="panel-body">
 										<a href="{{ url_for('login') }}" class="btn btn-skin btn-block btn-lg">Sign in</a>
 										<a href="{{ url_for('register') }}" class="btn btn-skin btn-block btn-lg">Sign up</a>
-										<!--
-									<form role="form" class="lead">
-										<div class="row">
-											<div class="col-xs-6 col-sm-6 col-md-6">
-												<div class="form-group">
-													<label></label>
-													<input type="text" name="first_name" id="first_name" class="form-control input-md">
-												</div>
-											</div>
-											<div class="col-xs-6 col-sm-6 col-md-6">
-												<div class="form-group">
-													<label>Last Name</label>
-													<input type="text" name="last_name" id="last_name" class="form-control input-md">
-												</div>
-											</div>
-										</div>
-
-										<div class="row">
-											<div class="col-xs-6 col-sm-6 col-md-6">
-												<div class="form-group">
-													<label>Email</label>
-													<input type="email" name="email" id="email" class="form-control input-md">
-												</div>
-											</div>
-											<div class="col-xs-6 col-sm-6 col-md-6">
-												<div class="form-group">
-													<label>Phone number</label>
-													<input type="text" name="phone" id="phone" class="form-control input-md">
-												</div>
-											</div>
-										</div>
-										
-										<input type="submit" value="Submit" class="btn btn-skin btn-block btn-lg">
-										
-										<!--<p class="lead-footer">* We'll contact you by email/phone soon</p>-->
-									
-									</form>
 								</div>
 							</div>				
 						
@@ -89,16 +52,11 @@
 
 	
 	<!-- Section: features -->
-    <section id="features" class="home-section nopadding paddingtop-60" style="align:center;">
+    <section id="features" class="home-section nopadding paddingtop-60 thickBottomBorder" style="align:center;">
 
 		<div class="container">
 
         <div class="row">
-			<!--<div class="col-sm-6 col-md-6">
-				<div class="wow fadeInUp" data-wow-delay="0.2s">
-				<img src="img/dummy/img-1.jpg" class="img-responsive" alt="" />
-				</div>
-            </div>-->
 			<div class="col-sm-3 col-md-3">
 				
 				<div class="wow fadeInRight" data-wow-delay="0.1s">
@@ -110,6 +68,10 @@
 						<h5 class="h-light">Generate Contracts in minutes</h5>
 						<p>With few inputs from your side, we make contract generation absolutely seamless and instant. As it should be</p>
 					</div>
+					<div class="service-desc">
+						<h5 class="h-light">Batch invoice generation</h5>
+						<p>Upload csvs and generate invoices in batches and keep track of them. All in one place</p>
+					</div>
                 </div>
 				</div>
 				
@@ -117,10 +79,6 @@
 				<div class="service-box">
 					<div class="service-icon" style="display:none">
 						<span class="fa fa-filter fa-3x"></span> 
-					</div>
-					<div class="service-desc">
-						<h5 class="h-light">Easy invoice and payment tracking</h5>
-						<p>We track the payment status of your invoices and send automated scheduled reminders, so that you dont have to </p>
 					</div>
                 </div>
 				</div>
@@ -162,8 +120,8 @@
 						<span class="fa fa-wheelchair fa-3x"></span> 
 					</div>
 					<div class="service-desc">
-						<h5 class="h-light">Batch invoice generation</h5>
-						<p>Upload csvs and generate invoices in batches and keep track of them. All in one place</p>
+						<h5 class="h-light">Easy payment tracking</h5>
+						<p>We track the payment status of your invoices and send automated scheduled reminders, so that you dont have to </p>
 					</div>
                 </div>
 				</div>

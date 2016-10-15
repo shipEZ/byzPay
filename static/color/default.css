@@ -1,12 +1,64 @@
-.btn{
-    background-color:#666666;
+body {
+    background-color:#f9f9f9;
 }
-a{
-    color:#666666;
+
+section {
+    background-color:transparent;
 }
+
+.color.alert {
+	color: #00B289;
+}
+
+.thickBottomBorder {
+    border-bottom: solid #666666;
+}
+
+.navbar.navbar-custom {
+    background-color:#fff;
+}
+
+.navbar-custom ul.nav li a {
+    color:#00B289;
+}
+
+.btn {
+    background-color:#00B289;
+}
+
+.homeContainer input.btn {
+    background-color:#666;
+}
+
+/* button */
+.btn-skin {
+  background-color: #00B289;
+  border-color: #4ACCD1;
+}
+
 a:hover,.icon-success,.pagination>li>a,
 a:focus {
-    color: #4ACCD1;
+    color: #00B289;
+}
+
+@media (max-width: 979px) and (min-width: 768px) {
+
+    .intro-content {
+        background-color:#f9f9f9;
+    }
+
+}
+
+footer {
+    background-color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color:#666;
+}
+
+a{
+    color:#666666;
 }
 
 .btn:hover{
@@ -14,11 +66,11 @@ a:focus {
 }
 
 .navbar-collapse, .sub-footer{
-    background-color:#F2F2F2;
+    background-color:#fff;
 }
 
-.navbar.navbar-custom {
-    background-color:#F2F2F2;
+.navbar .navbar-custom{
+    background-color:#fff;
 }
 
 ul.topnav li a {
@@ -53,15 +105,6 @@ ul.topnav li a {
 	color: #4ACCD1;
 }
 
-
-
-/* button */
-.btn-skin {
-  background-color: #4ACCD1;
-  border-color: #4ACCD1;
-}
-
-
 /* top */
 .top-area {
 	background: #3fbbc0;
@@ -92,9 +135,7 @@ ul.topnav li a {
 .highlight-color {
 	background-color: #4ACCD1;
 }
-.color {
-	color: #4ACCD1;
-}
+
 
 /* pricing box  */
 .pricing-content.featured h2,.pricing-content.featured .price-bottom {

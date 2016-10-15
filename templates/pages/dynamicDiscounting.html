@@ -24,7 +24,7 @@
               <form action="/dynamicDiscounting" method="POST">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
-            <td><input type="range" id="discount" name="discount"  value="10" min="0" max="100">
+            <td><input type="range" id="discount" name="discount"  value="2" min="0" max="10">
                 <output for="discount" onforminput="value = discount.valueAsNumber;"></output>
                 <input type="hidden" id="invoiceId" name="invoiceId" value="{{ invoice.invoiceNumber }}"></td>
             <td><input type="submit" name="my-form" id="sendDiscount2" value="Send Discount">&nbsp;</td>

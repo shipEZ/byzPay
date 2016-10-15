@@ -94,9 +94,6 @@ class ResetPasswordSubmit(Form):
 
 
 class RequestDemo(Form):
-    name = TextField(
-        'Name', validators=[DataRequired(message="Please enter your name"), Length(min=1, max=25)]
-    )
     email = EmailField(
         'Email id', validators=[DataRequired(message="Please enter your email address"),
                                 validators.Email("Please enter correct email address.")]

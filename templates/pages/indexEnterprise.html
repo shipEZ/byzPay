@@ -2,7 +2,7 @@
 {% block content %}
 
 	<!-- Section: intro -->
-    <section id="intro" class="intro">
+    <section id="intro" class="intro thickBottomBorder">
 		<div class="intro-content">
 			<div class="container">
 				<div class="row">
@@ -19,7 +19,6 @@
 						<ul class="lead-list">
 							<li><span class="fa fa-check fa-2x icon-success"></span><span class="list"><strong>Strengthen supplier relationships</strong><br /> by offering discounts in exchange for early payment</span></li>
 							<li><span class="fa fa-check fa-2x icon-success"></span><span class="list">Extend payment terms by using <strong>3rd party financing</strong><br /> to pay suppliers early</span></li>
-							<!--<li><span class="fa fa-check fa-2x icon-success"></span><span class="list"><strong>Payment & Tracking</strong><br />Get paid instantly and track when your invoices are seen </span></li>-->
 						</ul>
 
 						</div>
@@ -28,50 +27,34 @@
 
 					</div>
 					<div class="col-lg-6">
-						<div class="form-wrapper" style="padding-top:150px;">
+						<div class="form-wrapper">
 						<div class="wow fadeInRight" data-wow-duration="2s" data-wow-delay="0.2s">
 							<div class="panel panel-skin">
 							<div class="panel-heading" style="padding-bottom:12px;">
-									<h3 class="panel-title"><span class="fa fa-pencil-square-o"></span> Sign up today for free tier access <!--<small>(It's free!)</small>--></h3>
-									</div>
-									<div class="panel-body"> <!-- create the request form here itself -->
-										<a href="{{ url_for('request_demo') }}" class="btn btn-skin btn-block btn-lg">Request a demo</a>
-										<!--
-									<form role="form" class="lead">
-										<div class="row">
-											<div class="col-xs-6 col-sm-6 col-md-6">
-												<div class="form-group">
-													<label></label>
-													<input type="text" name="first_name" id="first_name" class="form-control input-md">
-												</div>
-											</div>
-											<div class="col-xs-6 col-sm-6 col-md-6">
-												<div class="form-group">
-													<label>Last Name</label>
-													<input type="text" name="last_name" id="last_name" class="form-control input-md">
-												</div>
-											</div>
-										</div>
-
+									<h3 class="panel-title"><span class="fa fa-pencil-square-o"></span> Request a Demo <!--<small>(It's free!)</small>--></h3>
+							</div>
+								<div class="panel-body">
+									<form role="form" method="post" class="lead">
+										{% if form.csrf_token.errors %}
+										  <div class="warning">You have submitted an invalid CSRF token</div>
+										{% endif %}
+										<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 										<div class="row">
 											<div class="col-xs-6 col-sm-6 col-md-6">
 												<div class="form-group">
 													<label>Email</label>
-													<input type="email" name="email" id="email" class="form-control input-md">
+													{{ form.email(class_ = 'form-control', required = true) }}
 												</div>
 											</div>
 											<div class="col-xs-6 col-sm-6 col-md-6">
 												<div class="form-group">
 													<label>Phone number</label>
-													<input type="text" name="phone" id="phone" class="form-control input-md">
+													{{ form.phone(class_ = 'form-control', required = true) }}
 												</div>
 											</div>
 										</div>
-										
+
 										<input type="submit" value="Submit" class="btn btn-skin btn-block btn-lg">
-										
-										<!--<p class="lead-footer">* We'll contact you by email/phone soon</p>-->
-									
 									</form>
 								</div>
 							</div>				
@@ -88,16 +71,11 @@
 
 	
 	<!-- Section: features -->
-    <section id="features" class="home-section nopadding paddingtop-60" style="align:center;">
+    <section id="features" class="home-section nopadding paddingtop-60 thickBottomBorder">
 
 		<div class="container">
 
-        <div class="row">
-			<!--<div class="col-sm-6 col-md-6">
-				<div class="wow fadeInUp" data-wow-delay="0.2s">
-				<img src="img/dummy/img-1.jpg" class="img-responsive" alt="" />
-				</div>
-            </div>-->
+        <div class="row centerAlign">
 			<div class="col-sm-3 col-md-3">
 				
 				<div class="wow fadeInRight" data-wow-delay="0.1s">

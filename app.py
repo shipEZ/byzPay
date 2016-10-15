@@ -371,13 +371,19 @@ def index_supplier():
 
 @app.route('/enterprise', methods=["GET", "POST"])
 def index_enterprise():
-  return render_template('pages/indexEnterprise.html')
+  form = RequestDemo(request.form)
+  if form.validate_on_submit():
+    enterprise = Business("", "", form.data['email'], "", form.data['phone'])
+    db.session.add(enterprise)
+    db.session.commit()
+    flash("Thanks for your interest! We'll be in touch soon", 'success')
+  return render_template('pages/indexEnterprise.html', form=form)
 
 @app.route('/requestDemo', methods=["GET", "POST"])
 def request_demo():
   form = RequestDemo(request.form)
   if form.validate_on_submit():
-    enterprise = Business(form.data['name'], "",form.data['email'],"", form.data['phone'])
+    enterprise = Business("", "",form.data['email'],"", form.data['phone'])
     db.session.add(enterprise)
     db.session.commit()
     flash("Thanks for your interest! We'll be in touch soon", 'success')
