@@ -12,7 +12,7 @@ import logging
 from logging import Formatter, FileHandler
 from itsdangerous import URLSafeTimedSerializer
 from datetime import datetime, timedelta
-from pyinvoice.models import InvoiceInfo, ClientInfo, Item
+from pyinvoice.models import InvoiceInfo, ClientInfo, Item, ServiceProviderInfo
 from pyinvoice.templates import SimpleInvoice
 from flask import request
 import json, os, urllib, requests
@@ -544,6 +544,13 @@ def createLineInvoice(line, current_user):
   db.session.commit()
   doc = SimpleInvoice('invoice' + str(invoice.id) + '.pdf')
   doc.invoice_info = InvoiceInfo(line[0], datetime.today(),invoiceDueDate)
+  business = Business.query.filter_by(id=current_user.id).first()
+  doc.service_provider_info = ServiceProviderInfo(
+    name=business.name,
+    street=business.street,
+    city=business.city,
+    state=business.state,
+  )
   doc.client_info = ClientInfo(email=clientEmail)
   doc.add_item(Item(invoiceDesc, line[5], unitCount, unitPrice))
   doc.finish()
