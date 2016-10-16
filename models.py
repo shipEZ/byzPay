@@ -103,8 +103,8 @@ class Invoice(Base):
         self.unitCount = unitCount
         self.unitPrice = unitPrice
         self.invoiceAmt = invoiceAmt
-        self.invoiceDueDate = invoiceDueDate.strftime('%d-%m-%y')
-        self.invoiceDate = invoiceDate.strftime('%d-%m-%y')
+        self.invoiceDueDate = invoiceDueDate
+        self.invoiceDate = invoiceDate
         self.invoiceDesc = invoiceDesc
         self.invoiceOpened = invoiceOpened
         self.invoicePaid = invoicePaid

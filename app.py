@@ -520,7 +520,7 @@ def send_discount(request):
   invoice = Invoice.query.filter_by(invoiceNumber=str(invoiceId)).first()
   invoiceAmt = str(int(float(invoice.invoiceAmt)) - int(float(invoice.invoiceAmt) * float(discount)*0.01 / 100.0))
   print invoiceAmt
-  invoiceDueDate = datetime.today() + timedelta(days=3)
+  invoiceDueDate = (datetime.today() + timedelta(days=3)).strftime('%d-%m-%y')
   invoiceNew = createLineInvoice(
     [invoice.invoiceNumber + "_discounted", "", invoice.clientEmail, "", invoice.invoiceDesc, "", invoiceDueDate,
      invoice.unitCount, invoice.unitPrice, invoiceAmt], current_user)
@@ -538,7 +538,7 @@ def createLineInvoice(line, current_user):
   clientEmail = line[2]
   clientName = line[1]
   invoiceAmt = line[9]
-  invoice = Invoice(invoiceNumber, clientName, clientEmail, current_user.id, unitCount, unitPrice, invoiceAmt, invoiceDueDate, datetime.today(),
+  invoice = Invoice(invoiceNumber, clientName, clientEmail, current_user.id, unitCount, unitPrice, invoiceAmt, invoiceDueDate, datetime.today().strftime('%d-%m-%y'),
                     invoiceDesc)
   db.session.add(invoice)
   db.session.commit()
@@ -553,7 +553,9 @@ def createLineInvoice(line, current_user):
 def createInvoice(excelContent, current_user):
   invoiceDict = {}
   for line in excelContent[1:]:
-    line[9]=str(float(line[7])*float(line[8]))
+    print line
+    line.append(str(float(line[7])*float(line[8])))
+    print line
     invoice = createLineInvoice(line, current_user)
     invoiceDict['invoice' + str(invoice.id) + '.pdf'] = invoice
   return invoiceDict
