@@ -3,23 +3,23 @@
 		<div class="row">
 			<div class="col-sm-6 col-md-4">
 				<div class="wow fadeInDown" data-wow-delay="0.1s">
-					<div class="widget">
+					<!--<div class="widget">
 						<h5>About Scribe</h5>
 						<p>
 						We are building a platform that will improve the cash flow for your business. Interested in learning how we do this?
 						</p>
-					</div>
+					</div>-->
 				</div>
 				<div class="wow fadeInDown" data-wow-delay="0.1s">
-				<!--<div class="widget">
-					<h5>Information</h5>
+				<div class="widget">
+					<h5>Solutions</h5>
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Features</a></li>
-						<li><a href="#">Pricing</a></li>
+						<li><a href="{{ url_for('index_enterprise') }}" class="color">Scribe For Enterprises</a></li>
+						<li><a href="{{ url_for('index_supplier') }}" class="color">Scribe For Suppliers</a></li>
+						<!--<li><a href="#">Features</a></li>
+						<li><a href="#">Pricing</a></li>-->
 					</ul>
-				</div>-->
+				</div>
 				</div>
 			</div>
 			<div class="col-sm-6 col-md-4">
@@ -27,7 +27,9 @@
 					<div class="widget">
 						<h5>Contact us</h5>
 						<p>
-						Contact us over email at support@tryscribe.com or over phone at +1-8586667323
+							<span class="fa fa-reply-all fa-1x icon-footer"></span>Email:&nbsp;&nbsp;support@tryscribe.com
+							<br>
+							<span class="fa fa-mobile-phone fa-2x icon-footer"></span>Phone:&nbsp;&nbsp;+1-4157469935
 						</p>
 					</div>
 				</div>
@@ -36,7 +38,8 @@
 				<div class="wow fadeInDown" data-wow-delay="0.1s">
 					<div class="widget">
 						<h5>Our location</h5>
-						<p>450 Townsend, san Francisco, CA - 94107</p>
+						<p><span class="fa fa-map-marker fa-1x icon-footer"></span>450 Townsend, san Francisco, CA - 94107</p>
+						<!--<script src='https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyC3eQG_fHJX7gTfpVPYw-8S1Ohqf68VJK8'></script><div style='overflow:hidden;height:200px;width:200px;'><div id='gmap_canvas' style='height:200px;width:200px;'></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div> <a href='https://embedmap.org/'>how to add google maps to my website</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=d66e9e6e7849715032ee17e21f886e1850c421cc'></script><script type='text/javascript'>function init_map(){var myOptions = {zoom:13,center:new google.maps.LatLng(37.774634,-122.39864169999998),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(37.774634,-122.39864169999998)});infowindow = new google.maps.InfoWindow({content:'<strong></strong><br>450 Townsend Street<br>94107 San Francisco<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>-->
 					</div>
 				</div>
 				<!--<div class="wow fadeInDown" data-wow-delay="0.1s">

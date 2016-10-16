@@ -39,19 +39,10 @@ textarea {
 }
 
 main {
-    margin-top:90px;
+    margin-top:58px;
     min-height:75%;
     background:transparent;
     color: #717171;
-}
-
-.centerAlign {
-    width: 90%;
-    margin: 0 auto;
-}
-
-.col-sm-3.col-md-3 {
-    width:33%;
 }
 
 table{
@@ -80,6 +71,12 @@ form {
 page styles
 ============= */
 
+/*
+#intro {
+    background: url(../img/bg1.jpg) repeat left top;
+    opacity:1;
+}
+*/
 .homeContainer {
     margin-left:20px;
     margin-right:20px;
@@ -116,9 +113,28 @@ page styles
     }
 }
 
-/*
-Landing page
-*/
+
+.centerAlign {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#features .row {
+    padding-bottom:30px;
+}
+
+.marginTop {
+    margin-top:90px;
+}
+
+.col-sm-3.col-md-3 {
+    width:33%;
+}
+
+
+/* ===========================
+--- Landing Page
+============================ */
 
 /* ===========================
 --- Intro
@@ -509,7 +525,6 @@ footer .widget h5 {
 
 
 .sub-footer {
-	margin-top: 50px;
     background-color: #f7f7f7;
 	border-top: 1px solid #ddd;
 	padding: 10px 0 0px;
@@ -539,6 +554,17 @@ footer .sub-footer  p {
 .icon-primary {
 	color: #4765a0;
 }
+
+.icon-footer {
+    margin-right:3px;
+}
+
+.icon-feature {
+    width:80%;
+    margin:auto;
+    padding-bottom:15px;
+}
+
 .icon-success {
 	color: #7db53b;
 }

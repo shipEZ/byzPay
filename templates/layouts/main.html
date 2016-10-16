@@ -11,7 +11,7 @@
 					☰
 				</button>
 				<ul class="nav navbar-brand">
-					<li><a href="{{ url_for('home') }}">Scribe Home</a></li>
+					<li><a href="{{ url_for('home') }}"><img src="{{ url_for('static',filename='img/scribeLogo4.png') }}" style="width:100px;"></a></li>
 				</ul>
 			</div>
           <div id="navbar" class="navbar-collapse collapse">
@@ -32,7 +32,7 @@
     </nav>
 </div>
 <!-- Begin page content -->
-<main id="content" role="main">
+<main id="content" role="main" style="padding-top:20px;">
 
   {% with messages = get_flashed_messages() %}
     {% if messages %}

@@ -6,8 +6,15 @@ section {
     background-color:transparent;
 }
 
-.color.alert {
+.color {
 	color: #00B289;
+}
+.alert {
+    color:#00B289;
+}
+
+.well.well-trans.backgroundWhite {
+    background-color:#fff;
 }
 
 .thickBottomBorder {
@@ -56,7 +63,11 @@ footer {
 h1, h2, h3, h4, h5, h6 {
     color:#666;
 }
-
+/*
+#indexMain h1, h2, h3, h4, h5, h6 {
+    color:#fff;
+}
+*/
 a{
     color:#666666;
 }
