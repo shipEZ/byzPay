@@ -1,7 +1,7 @@
 {% extends 'layouts/main.html' %}
-{% block title %}Create Invoices{% endblock %}
+{% block title %}Send Invoices{% endblock %}
 {% block content %}
-    <h2>Create Invoices</h2>
+    <h2>Send Invoices</h2>
     <div class="halfWidth floatLeft">
         <form method="post" class="form">
             {% if form.csrf_token.errors %}
@@ -16,7 +16,8 @@
             {{ form.itemSummary(class_ = 'form-control first-input', placeholder = form.itemSummary.label.text, required = true, autofocus = true) }}
             {{ form.description(class_ = 'form-control last-input', placeholder = form.description.label.text) }}
             {{ form.invoiceDueDate(class_ = 'form-control last-input', placeholder = form.invoiceDueDate.label.text, required = true) }}
-            {{ form.invoiceAmt(class_ = 'form-control last-input', placeholder = form.invoiceAmt.label.text, required = true) }}
+            {{ form.unitCount(class_ = 'form-control last-input', placeholder = form.unitCount.label.text, required = true) }}
+            {{ form.unitPrice(class_ = 'form-control last-input', placeholder = form.unitPrice.label.text, required = true) }}
             <input type="checkbox">Send 30 and 60 day automated reminders</input>
             <input type="submit" value="create invoice" class="btn btn-primary btn-lg btn-block" >
         </form>
@@ -35,10 +36,10 @@
         </form>
         <b>Your excel table should have the following column order:</b><br>
         <br>
-             Invoice Number, Client Name, Client Email, Client Phone, Item Summary, Item Description, Invoice Due Date, Invoice Amount
+             Invoice Number, Client Name, Client Email, Client Phone, Item Summary, Item Description, Invoice Due Date, No.of Units, Unit Price
         <br>
-        <a href="{{ url_for('static', filename='files/sampleInvoiceList.csv') }}" class="underlineDecorator">Download sample excel file</a>&nbsp;&nbsp;&nbsp;
-        <a href="{{ url_for('static', filename='files/sampleInvoice.pdf') }}" class="underlineDecorator">Download sample Invoice generated</a>
+        <a href="{{ url_for('static', filename='files/sampleInvoiceList.csv') }}" class="underlineDecorator">Download Template Excel File</a>&nbsp;&nbsp;&nbsp;
+        <a href="{{ url_for('static', filename='files/sampleInvoice.pdf') }}" class="underlineDecorator">Download sample Invoice Generated</a>
     </div>
 
 {% endblock %}

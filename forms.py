@@ -15,13 +15,13 @@ class RegisterBusiness(Form):
         'Company', validators=[DataRequired("Please enter your company name"), Length(min=1, max=50)]
     )
     email = EmailField(
-        'Email id', validators=[DataRequired(message="Please enter your email address"), validators.Email("Please enter correct email address.")]
+        'Email', validators=[DataRequired(message="Please enter your email address"), validators.Email("Please enter correct email address.")]
     )
     password = PasswordField(
         'Password', validators=[DataRequired(), Length(min=2, max=40)]
     )
     phone = IntegerField(
-        'phone no', validators=[DataRequired(message="Please enter your phone number")]
+        'Phone', validators=[DataRequired(message="Please enter your phone number")]
     )
     '''
     confirm = PasswordField(
@@ -74,8 +74,11 @@ class CreateLineInvoice(Form):
     invoiceDueDate = TextField(
         'Invoice Due Date', validators=[DataRequired("Please enter invoice due date"), Length(min=1, max=50)]
     )
-    invoiceAmt = TextField(
-        'Invoice Amt', validators=[DataRequired("Please enter invoice amount"), Length(min=1, max=50)]
+    unitCount = TextField(
+        'Unit Count', validators=[DataRequired("Please enter number of units"), Length(min=1, max=50)]
+    )
+    unitPrice = TextField(
+        'Unit Price', validators=[DataRequired("Please enter unit price"), Length(min=1, max=50)]
     )
 
 class LoginForm(Form):
@@ -95,9 +98,9 @@ class ResetPasswordSubmit(Form):
 
 class RequestDemo(Form):
     email = EmailField(
-        'Email id', validators=[DataRequired(message="Please enter your email address"),
+        'Email', validators=[DataRequired(message="Please enter your email address"),
                                 validators.Email("Please enter correct email address.")]
     )
     phone = IntegerField(
-        'phone no', validators=[DataRequired(message="Please enter your phone number")]
+        'Phone', validators=[DataRequired(message="Please enter your phone number")]
     )

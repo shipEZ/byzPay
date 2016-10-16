@@ -160,7 +160,8 @@ def create_invoice():
   form = CreateLineInvoice(request.form)
   if form.validate_on_submit():
     line = [form.data['invoiceNumber'], form.data['clientName'], form.data['clientEmail'], form.data['clientPhone'],
-            form.data['itemSummary'], form.data['description'], form.data['invoiceDueDate'], form.data['invoiceAmt']]
+            form.data['itemSummary'], form.data['description'], form.data['invoiceDueDate'], form.data['unitCount'], form.data['unitPrice']]
+    print line
     invoice = createLineInvoice(line, current_user)
     db.session.add(invoice)
     db.session.commit()
@@ -171,16 +172,15 @@ def create_invoice():
   if request.method == 'POST':
     excelContent = request.get_array(field_name='file')
     header = [str(x) for x in excelContent[0]]
-    line = ["Invoice Number", "Client Name", "Client Email", "Client Phone", "Item Summary", "Item Description",
-            "Invoice Due Date", "Invoice Amount"]
+    line = ["Invoice Number","Client Name","Client Email","Client Phone","Item Summary","Item Description",
+            "Invoice Due Date","Unit Count","Unit Price"]
     if (header == line):
       invoiceDict = createInvoice(excelContent, current_user)
       returnedInvoiceDict = sendMail(invoiceDict)
       return redirect(url_for('display_result', result=json.dumps(returnedInvoiceDict)))
     else:
       print header
-      flash(
-        "Correct your column order to the following - invoice no,client name,client email,client phone,item summary,item description,due date,invoice amount")
+      flash("Correct your column order to the following - 'Invoice Number','Client Name','Client Email','Client Phone','Item Summary','Item Description','Invoice Due Date','Unit Count','Unit Price'")
   return render_template('forms/createInvoice.html', form=form)
 
 
@@ -281,7 +281,7 @@ def create_business():
     subject = "Please confirm your email"
     sendConfirmationMail(user.email, subject, html)
     login_user(user)
-    flash('A confirmation email has been sent via email.', 'success')
+    flash('A confirmation email has been sent. Please check your inbox', 'success')
     return redirect(url_for("login"))
   # else:
   #    flash('Error. Please try again!')
@@ -376,7 +376,7 @@ def index_enterprise():
     enterprise = Business("", "", form.data['email'], "", form.data['phone'])
     db.session.add(enterprise)
     db.session.commit()
-    flash("Thanks for your interest! We'll be in touch soon", 'success')
+    flash("Thanks for your interest! We'll be in touch soon.", 'success')
   return render_template('pages/indexEnterprise.html', form=form)
 
 @app.route('/requestDemo', methods=["GET", "POST"])
@@ -520,7 +520,7 @@ def send_discount(request):
   invoiceDueDate = datetime.today() + timedelta(days=3)
   invoiceNew = createLineInvoice(
     [invoice.invoiceNumber + "_discounted", "", invoice.clientEmail, "", invoice.invoiceDesc, "", invoiceDueDate,
-     invoiceAmt], current_user)
+     invoice.unitCount, invoice.unitPrice, invoiceAmt], current_user)
   invoiceDict = {}
   invoiceDict['invoice' + str(invoiceNew.id) + '.pdf'] = invoiceNew
   returnedInvoiceDict = sendMail(invoiceDict)
@@ -529,18 +529,20 @@ def send_discount(request):
 def createLineInvoice(line, current_user):
   invoiceNumber = str(line[0])
   invoiceDueDate = line[6]
-  invoiceAmt = line[7]
+  unitCount = line[7]
+  unitPrice = line[8]
   invoiceDesc = line[4]
   clientEmail = line[2]
   clientName = line[1]
-  invoice = Invoice(invoiceNumber, clientName, clientEmail, current_user.id, invoiceAmt, invoiceDueDate, datetime.today(),
+  invoiceAmt = str(float(unitCount)*float(unitPrice))
+  invoice = Invoice(invoiceNumber, clientName, clientEmail, current_user.id, unitCount, unitPrice, invoiceAmt, invoiceDueDate, datetime.today(),
                     invoiceDesc)
   db.session.add(invoice)
   db.session.commit()
   doc = SimpleInvoice('invoice' + str(invoice.id) + '.pdf')
   doc.invoice_info = InvoiceInfo(line[0], datetime.today(),invoiceDueDate)
   doc.client_info = ClientInfo(email=clientEmail)
-  doc.add_item(Item(invoiceDesc, line[5], '1', invoiceAmt))
+  doc.add_item(Item(invoiceDesc, line[5], unitCount, unitPrice))
   doc.finish()
   return invoice
 

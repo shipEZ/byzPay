@@ -85,6 +85,8 @@ class Invoice(Base):
     clientName =  db.Column(db.String(120))
     clientEmail = db.Column(db.String(120))
     businessId = db.Column(db.String(30))
+    unitCount = db.Column(db.String(30))
+    unitPrice = db.Column(db.String(30))
     invoiceAmt = db.Column(db.String(30))
     invoiceDueDate = db.Column(db.String(30))
     invoiceDate = db.Column(db.String(30))
@@ -92,12 +94,14 @@ class Invoice(Base):
     invoiceOpened = db.Column(db.Boolean, default=False)
     invoicePaid = db.Column(db.Boolean, default=False)
 
-    def __init__(self, invoiceNumber=None, clientName = None, clientEmail=None, businessId=None, invoiceAmt=None, invoiceDueDate=None,
-                 invoiceDate=None,  invoiceDesc=None, invoiceOpened=False, invoicePaid=False):
+    def __init__(self, invoiceNumber=None, clientName = None, clientEmail=None, businessId=None, unitCount=None, unitPrice=None, invoiceAmt=None,
+                 invoiceDueDate=None, invoiceDate=None,  invoiceDesc=None, invoiceOpened=False, invoicePaid=False):
         self.invoiceNumber = invoiceNumber
         self.clientName = clientName
         self.clientEmail = clientEmail
         self.businessId = businessId
+        self.unitCount = unitCount
+        self.unitPrice = unitPrice
         self.invoiceAmt = invoiceAmt
         self.invoiceDueDate = invoiceDueDate
         self.invoiceDate = invoiceDate
