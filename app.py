@@ -105,7 +105,6 @@ def stripe_charge():
 def stripe_payment_form():
   invoiceId = request.args['invoiceId']
   invoice = Invoice.query.filter_by(id=invoiceId).first()
-  print invoice.id, invoice.invoiceAmt
   return render_template('pages/stripePayment.html', key=app.config['STRIPE_PUBLISHABLE_KEY'], invoice=invoice)
 
 
