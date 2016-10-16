@@ -553,6 +553,7 @@ def createLineInvoice(line, current_user):
 def createInvoice(excelContent, current_user):
   invoiceDict = {}
   for line in excelContent[1:]:
+    line[9]=str(float(line[7])*float(line[8]))
     invoice = createLineInvoice(line, current_user)
     invoiceDict['invoice' + str(invoice.id) + '.pdf'] = invoice
   return invoiceDict
