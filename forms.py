@@ -77,7 +77,7 @@ class CreateLineInvoice(Form):
     unitCount = TextField(
         'Unit Count', validators=[DataRequired("Please enter number of units"), Length(min=1, max=50)]
     )
-    unitPrice = TextField(
+    unitPrice = IntegerField(
         'Unit Price', validators=[DataRequired("Please enter unit price"), Length(min=1, max=50)]
     )
 
