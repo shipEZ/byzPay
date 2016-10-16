@@ -100,8 +100,6 @@ def stripe_charge():
                            connected_account_email=stripe_email)
   return redirect(url_for('home'))
 
-
-
 @app.route('/stripePayment', methods=["GET", "POST"])
 @login_required
 def stripe_payment_form():
@@ -496,7 +494,7 @@ def sendMail(invoiceDict,isDiscount):
         subject = "Discounted invoice received from %s for $%s" % (business.company, invoice.invoiceAmt)
       else:
         subject = "Invoice received from %s for $%s" % (business.company, invoice.invoiceAmt)
-      if current_user.stripeToken is not None:
+      if current_user.stripeToken is None:
         link = "http://tryscribe.com/stripePayment?invoiceId="+str(invoice.id)
         html = render_template('pages/invoiceMailWithPaymentLink.html', business=business, invoice=invoice,
                                key=app.config['STRIPE_PUBLISHABLE_KEY'], link=link)
@@ -519,7 +517,6 @@ def send_discount(request):
   invoiceId = request.form['invoiceId']
   invoice = Invoice.query.filter_by(invoiceNumber=str(invoiceId)).first()
   invoiceAmt = str(float(float(invoice.invoiceAmt)) - int(float(invoice.invoiceAmt) * float(discount)*0.01 / 100.0))
-  print invoiceAmt
   invoiceDueDate = (datetime.today() + timedelta(days=3)).strftime('%d-%m-%y')
   invoiceNew = createLineInvoice(
     [invoice.invoiceNumber + "_discounted", "", invoice.clientEmail, "", invoice.invoiceDesc, "", invoiceDueDate,
@@ -551,7 +548,7 @@ def createLineInvoice(line, current_user):
     city=business.city,
     state=business.state,
   )
-  doc.client_info = ClientInfo(email=clientEmail)
+  doc.client_info = ClientInfo(email=clientEmail,name=clientName)
   doc.add_item(Item(invoiceDesc, line[5], unitCount, unitPrice))
   doc.finish()
   return invoice
