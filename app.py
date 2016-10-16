@@ -159,8 +159,10 @@ def stripe_callback():
 def create_invoice():
   form = CreateLineInvoice(request.form)
   if form.validate_on_submit():
-    line = [form.data['invoiceNumber'], form.data['clientName'], form.data['clientEmail'], form.data['clientPhone'],
-            form.data['itemSummary'], form.data['description'], form.data['invoiceDueDate'], form.data['unitCount'], form.data['unitPrice'],str(float(form.data['unitCount'])*float(form.data['unitPrice']))]
+    invoiceAmt = str(float(form.data['unitCount'])*float(form.data['unitPrice']))
+    line = [form.data['invoiceNumber'], form.data['clientName'], form.data['clientEmail'], form.data['clientPhone'],form.data['itemSummary'],
+            form.data['description'], form.data['invoiceDueDate'], form.data['unitCount'], form.data['unitPrice'],invoiceAmt]
+    print line
     invoice = createLineInvoice(line, current_user)
     db.session.add(invoice)
     db.session.commit()
