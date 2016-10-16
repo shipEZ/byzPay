@@ -160,14 +160,13 @@ def create_invoice():
   form = CreateLineInvoice(request.form)
   if form.validate_on_submit():
     line = [form.data['invoiceNumber'], form.data['clientName'], form.data['clientEmail'], form.data['clientPhone'],
-            form.data['itemSummary'], form.data['description'], form.data['invoiceDueDate'], form.data['unitCount'], form.data['unitPrice']]
-    print line
+            form.data['itemSummary'], form.data['description'], form.data['invoiceDueDate'], form.data['unitCount'], form.data['unitPrice'],str(float(form.data['unitCount'])*float(form.data['unitPrice']))]
     invoice = createLineInvoice(line, current_user)
     db.session.add(invoice)
     db.session.commit()
     invoiceDict = {}
     invoiceDict['invoice' + str(invoice.id) + '.pdf'] = invoice
-    returnedInvoiceDict = sendMail(invoiceDict)
+    returnedInvoiceDict = sendMail(invoiceDict,False)
     return redirect(url_for('display_result', result=json.dumps(returnedInvoiceDict)))
   if request.method == 'POST':
     excelContent = request.get_array(field_name='file')
@@ -176,7 +175,7 @@ def create_invoice():
             "Invoice Due Date","Unit Count","Unit Price"]
     if (header == line):
       invoiceDict = createInvoice(excelContent, current_user)
-      returnedInvoiceDict = sendMail(invoiceDict)
+      returnedInvoiceDict = sendMail(invoiceDict,False)
       return redirect(url_for('display_result', result=json.dumps(returnedInvoiceDict)))
     else:
       print header
@@ -483,7 +482,7 @@ def redirect_url(default='index'):
 # ----------------------------------------------------------------------------#
 
 
-def sendMail(invoiceDict):
+def sendMail(invoiceDict,isDiscount):
   with mail.connect() as conn:
     invoiceMailDict = {}
     directory = 'static/invoices/' + current_user.name + '/'
@@ -491,7 +490,10 @@ def sendMail(invoiceDict):
       os.makedirs(directory)
     for invoicePdf, invoice in invoiceDict.items():
       business = Business.query.filter_by(id=invoice.businessId).first()
-      subject = "Invoice received from %s for $%s" % (business.company, invoice.invoiceAmt)
+      if(isDiscount):
+        subject = "Discounted invoice received from %s for $%s" % (business.company, invoice.invoiceAmt)
+      else:
+        subject = "Invoice received from %s for $%s" % (business.company, invoice.invoiceAmt)
       if current_user.stripeToken is not None:
         link = "http://tryscribe.com/stripePayment?invoiceId="+str(invoice.id)
         html = render_template('pages/invoiceMailWithPaymentLink.html', business=business, invoice=invoice,
@@ -513,17 +515,16 @@ def sendMail(invoiceDict):
 def send_discount(request):
   discount = request.form['discount']
   invoiceId = request.form['invoiceId']
-  print discount
-  print invoiceId
   invoice = Invoice.query.filter_by(invoiceNumber=str(invoiceId)).first()
-  invoiceAmt = str(int(float(invoice.invoiceAmt)) - int(float(invoice.invoiceAmt) * float(discount) / 100.0))
+  invoiceAmt = str(int(float(invoice.invoiceAmt)) - int(float(invoice.invoiceAmt) * float(discount)*0.01 / 100.0))
+  print invoiceAmt
   invoiceDueDate = datetime.today() + timedelta(days=3)
   invoiceNew = createLineInvoice(
     [invoice.invoiceNumber + "_discounted", "", invoice.clientEmail, "", invoice.invoiceDesc, "", invoiceDueDate,
      invoice.unitCount, invoice.unitPrice, invoiceAmt], current_user)
   invoiceDict = {}
   invoiceDict['invoice' + str(invoiceNew.id) + '.pdf'] = invoiceNew
-  returnedInvoiceDict = sendMail(invoiceDict)
+  returnedInvoiceDict = sendMail(invoiceDict,discount)
   return returnedInvoiceDict
 
 def createLineInvoice(line, current_user):
@@ -534,7 +535,7 @@ def createLineInvoice(line, current_user):
   invoiceDesc = line[4]
   clientEmail = line[2]
   clientName = line[1]
-  invoiceAmt = str(float(unitCount)*float(unitPrice))
+  invoiceAmt = line[9]
   invoice = Invoice(invoiceNumber, clientName, clientEmail, current_user.id, unitCount, unitPrice, invoiceAmt, invoiceDueDate, datetime.today(),
                     invoiceDesc)
   db.session.add(invoice)
