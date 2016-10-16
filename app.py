@@ -518,7 +518,7 @@ def send_discount(request):
   discount = request.form['discount']
   invoiceId = request.form['invoiceId']
   invoice = Invoice.query.filter_by(invoiceNumber=str(invoiceId)).first()
-  invoiceAmt = str(int(float(invoice.invoiceAmt)) - int(float(invoice.invoiceAmt) * float(discount)*0.01 / 100.0))
+  invoiceAmt = str(float(float(invoice.invoiceAmt)) - int(float(invoice.invoiceAmt) * float(discount)*0.01 / 100.0))
   print invoiceAmt
   invoiceDueDate = (datetime.today() + timedelta(days=3)).strftime('%d-%m-%y')
   invoiceNew = createLineInvoice(
