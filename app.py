@@ -540,7 +540,7 @@ def createLineInvoice(line, current_user):
   doc = SimpleInvoice('invoice' + str(invoice.id) + '.pdf')
   doc.invoice_info = InvoiceInfo(line[0], datetime.today(),invoiceDueDate)
   doc.client_info = ClientInfo(email=clientEmail)
-  doc.add_item(Item(invoiceDesc, line[5], invoiceAmt, '0'))
+  doc.add_item(Item(invoiceDesc, line[5], '1', invoiceAmt))
   doc.finish()
   return invoice
 
