@@ -122,7 +122,7 @@ def stripe_authorize():
 
 
 @app.route('/oauth/callback')
-@login_required
+#@login_required
 def stripe_callback():
   code = request.args.get('code')
   data = {
