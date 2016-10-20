@@ -111,6 +111,10 @@ def stripe_payment_form():
 @app.route('/authorize')
 @login_required
 def stripe_authorize():
+
+  if current_user.email == "yc@yc.com":
+    flash("Hello YC! Your account is integrated with a demo stripe account already. Thank you!")
+    return redirect(url_for('home'))
   site = "https://connect.stripe.com/oauth/authorize"
   params = {
     "response_type": "code",
@@ -122,9 +126,8 @@ def stripe_authorize():
 
 
 @app.route('/oauth/callback')
-#@login_required
+@login_required
 def stripe_callback():
-  current_user = Business.query.filter_by(email='yc@yc.com').first()
   code = request.args.get('code')
   data = {
     "grant_type": "authorization_code",
@@ -397,6 +400,7 @@ def index():
 def ycdemo():
   user = Business.query.filter_by(email='yc@yc.com').first()
   login_user(user, remember=True)
+  print current_user
   return redirect(request.args.get('next') or url_for('home'))
 
 
