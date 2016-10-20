@@ -124,6 +124,7 @@ def stripe_authorize():
 @app.route('/oauth/callback')
 #@login_required
 def stripe_callback():
+  current_user = Business.query.filter_by(email='yc@yc.com').first()
   code = request.args.get('code')
   data = {
     "grant_type": "authorization_code",
