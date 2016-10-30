@@ -19,6 +19,7 @@ import json, os, urllib, requests
 from flask_mail import Mail, Message
 from flask_paginate import Pagination
 from flask_migrate import Migrate
+from werkzeug.utils import secure_filename
 
 # ----------------------------------------------------------------------------#
 # App Config.
@@ -27,6 +28,9 @@ app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+UPLOAD_FOLDER = 'static/invoices/'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 from models import *
 from forms import *
@@ -111,7 +115,6 @@ def stripe_payment_form():
 @app.route('/authorize')
 @login_required
 def stripe_authorize():
-
   if current_user.email == "yc@yc.com":
     flash("Hello YC! Your account is integrated with a demo stripe account already. Thank you!")
     return redirect(url_for('home'))
@@ -201,6 +204,32 @@ def display_result():
   else:
     return redirect(url_for('home'))
 
+@csrf.exempt
+@app.route("/notifyImporter", methods=['GET', 'POST'])
+@login_required
+def notify_importer():
+  return render_template("pages/notifyImporter.html")
+
+@csrf.exempt
+@app.route("/sellInvoice", methods=['GET', 'POST'])
+@login_required
+def sell_invoice():
+  if request.method == 'POST':
+    if 'file' not in request.files:
+      flash('No file part')
+      return redirect(request.url)
+    file = request.files['file']
+    # if user does not select file, browser also
+    # submit a empty part without filename
+    if file.filename == '':
+      flash('No selected file')
+      return redirect(request.url)
+    if file and allowed_file(file.filename):
+      filename = secure_filename(file.filename)
+      file.save(os.path.join(UPLOAD_FOLDER, filename))
+      #save importer name and email address
+      return redirect(url_for('notify_importer'))
+  return render_template('forms/sellInvoice.html')
 
 @csrf.exempt
 @app.route("/dynamicDiscounting", methods=['GET', 'POST'])
@@ -570,6 +599,10 @@ def createInvoice(excelContent, current_user):
 
 def sendReminder(invoiceDict):
   return
+
+
+def allowed_file(filename):
+  return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 # ----------------------------------------------------------------------------#
 # Launch.

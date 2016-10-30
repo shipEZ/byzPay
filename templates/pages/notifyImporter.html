@@ -1,0 +1,10 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Notify Importer{% endblock %}
+{% block content %}
+<div align="center">
+    <p>Thanks for uploading your receivables! We will look up your importer details and get back with an interest rate shortly!</p>
+    <p>Meanwhile, you can <a href="{{ url_for('static', filename='files/noticeOfAssignment.pdf') }}" class="underlineDecorator">
+        download the following notice of assignment </a> which we will need you to send to your importer once you accept our interest rates!
+    </p>
+</div>
+{% endblock %}
