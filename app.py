@@ -214,6 +214,9 @@ def notify_importer():
 @app.route("/sellInvoice", methods=['GET', 'POST'])
 @login_required
 def sell_invoice():
+  directory = 'static/invoices/' + current_user.name + '/'
+  if not os.path.exists(directory):
+    os.makedirs(directory)
   if request.method == 'POST':
     if 'file' not in request.files:
       flash('No file part')
@@ -226,7 +229,7 @@ def sell_invoice():
       return redirect(request.url)
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
-      file.save(os.path.join(UPLOAD_FOLDER, filename))
+      file.save(os.path.join(directory, filename))
       #save importer name and email address
       return redirect(url_for('notify_importer'))
   return render_template('forms/sellInvoice.html')
