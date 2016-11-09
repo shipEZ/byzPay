@@ -1,0 +1,36 @@
+{% include 'mailer/mailHeader.html' %}
+<!-- START CENTERED WHITE CONTAINER -->
+<span class="preheader">Scribe is a export factoring company discounting indian export invoices!</span>
+<table class="main">
+
+  <!-- START MAIN CONTENT AREA -->
+  <tr>
+    <td class="wrapper">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            <p>Hi {{ name }},</p>
+            <p>Scribe is a marketplace for receivables. We buy your US export invoices at cheap USD rates paying you instantly and collect the money at a later date from your creditworthy supplier!</p>
+            <p>Want to know more?</p>
+              <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+              <tbody><tr><td align="left">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                              <td> <a href="http://tryscribe.com/joinScribe?email={{ email }}&name={{ name }}" target="_blank">Get foreign currency credit line!</a> </td>
+                            </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- END MAIN CONTENT AREA -->
+  </table>
+{% include 'mailer/mailFooter.html' %}

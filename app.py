@@ -36,6 +36,9 @@ from models import *
 from forms import *
 from paymentFunctions import stripe_payment
 
+mailers={}
+mailers["onboarding"]="mailer/onboarding.html"
+
 csrf = CsrfProtect(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -457,7 +460,6 @@ def internal_error(error):
 def not_found_error(error):
   return render_template('errors/404.html'), 404
 
-
 if not app.debug:
   file_handler = FileHandler('error.log')
   file_handler.setFormatter(
@@ -468,7 +470,35 @@ if not app.debug:
   app.logger.addHandler(file_handler)
   app.logger.info('errors')
 
+# ----------------------------------------------------------------------------#
+# Mailers
+# ----------------------------------------------------------------------------#
+@app.route('/onboarding')
+def onboarding():
+  subject="Get cheap US Dollar Credit Line today!"
+  email = "sachinbhat.as@gmail.com"
+  name = "sachin"
+  attachment = "static/files/scribeForCustomers.pdf"
+  emails={}
+  emails["1"] = sendMailers(name, email, subject, attachment,
+              "onboarding")
+  print emails
+  return jsonify(**emails)
 
+@app.route('/joinScribe', methods=["GET", "POST"])
+def joinScribe():
+  name=request['name']
+  email=request['email']
+  subject=name+" is interested in scribe!"
+  msg = Message(
+    subject,
+    recipients=["sachin@tryscribe.com"],
+    html=email,
+    sender=app.config['MAIL_DEFAULT_SENDER']
+  )
+  mail.send(msg)
+  flash("Thanks for showing your interest {{ name }}! We will get in touch with you shortly. Meanwhile register below to explore Scribe!")
+  return redirect(url_for('register'))
 # ----------------------------------------------------------------------------#
 # Site functions
 # ----------------------------------------------------------------------------#
@@ -599,6 +629,19 @@ def createInvoice(excelContent, current_user):
     invoice = createLineInvoice(line, current_user)
     invoiceDict['invoice' + str(invoice.id) + '.pdf'] = invoice
   return invoiceDict
+
+def sendMailers(name, email, subject, attachment, htmlFile):
+  with mail.connect() as conn:
+    html = render_template(mailers[htmlFile], name=name)
+    msg = Message(sender=app.config['MAIL_DEFAULT_SENDER'],
+                    recipients=[email],
+                    html=html,
+                    subject=subject)
+    with app.open_resource(attachment) as fp:
+      msg.attach(fp.name, "application/pdf", fp.read())
+    conn.send(msg)
+  return email
+
 
 def sendReminder(invoiceDict):
   return
