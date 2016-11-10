@@ -473,32 +473,39 @@ if not app.debug:
 # ----------------------------------------------------------------------------#
 # Mailers
 # ----------------------------------------------------------------------------#
-@app.route('/onboarding')
+@app.route('/onboarding',methods=["GET", "POST"])
 def onboarding():
-  subject="Get cheap US Dollar Credit Line today!"
-  email = "sachinbhat.as@gmail.com"
-  name = "sachin"
-  attachment = "static/files/scribeForCustomers.pdf"
-  emails={}
-  emails["1"] = sendMailers(name, email, subject, attachment,
-              "onboarding")
-  print emails
-  return jsonify(**emails)
+  form=MailerForm(request.form)
+  if request.method=='POST':
+    subject="Get cheap US Dollar Credit Line today!"
+    email = "sachinbhat.as@gmail.com"
+    name = "sachin"
+    attachment = "static/files/scribeForCustomers.pdf"
+    emails={}
+    emails["1"] = sendMailers(name, email, subject, attachment,
+                "onboarding")
+    print emails
+    flash("email has been sent!")
+  return render_template('forms/mailerForm.html',form=form)
 
 @app.route('/onboard', methods=["GET", "POST"])
-def joinScribe():
-  if(request.method=="POST"):
-    name=request['name']
-    email=request['email']
+def onboard():
+  with mail.connect() as conn:
+    name=request.args.get('name')
+    email=request.args.get('email')
+    print name
+    print email
     subject=name+" is interested in scribe!"
     msg = Message(
       subject,
-      recipients=["sachin@tryscribe.com"],
+      recipients=["rutika@tryscribe.com"],
       html=email,
       sender=app.config['MAIL_DEFAULT_SENDER']
     )
-    mail.send(msg)
-    flash("Thanks for showing your interest {{ name }}! We will get in touch with you shortly. Meanwhile register below to explore Scribe!")
+    print msg
+    conn.send(msg)
+  flashMsg="Thanks for showing your interest "+name+"! We will get in touch with you shortly. Meanwhile register below to explore Scribe!"
+  flash(flashMsg)
   return redirect(url_for('register'))
 # ----------------------------------------------------------------------------#
 # Site functions

@@ -91,6 +91,16 @@ class ForgotForm(Form):
         'Email', validators=[DataRequired(), Length(min=6, max=40), validators.Email("Please enter correct email address.")]
     )
 
+
+class MailerForm(Form):
+    name = TextField(
+        'Name', validators=[DataRequired(message="Please enter client name"), Length(min=1, max=25)]
+    )
+    email = TextField(
+        'Email',
+        validators=[DataRequired(), Length(min=6, max=40), validators.Email("Please enter client email address.")]
+    )
+
 class ResetPasswordSubmit(Form):
     password = PasswordField('Password', validators=[validators.Required(), validators.EqualTo('confirm', message='Passwords must match')])
     confirm = PasswordField('Confirm Password')
