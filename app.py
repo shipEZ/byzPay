@@ -485,19 +485,20 @@ def onboarding():
   print emails
   return jsonify(**emails)
 
-@app.route('/joinScribe', methods=["GET", "POST"])
+@app.route('/onboard', methods=["GET", "POST"])
 def joinScribe():
-  name=request['name']
-  email=request['email']
-  subject=name+" is interested in scribe!"
-  msg = Message(
-    subject,
-    recipients=["sachin@tryscribe.com"],
-    html=email,
-    sender=app.config['MAIL_DEFAULT_SENDER']
-  )
-  mail.send(msg)
-  flash("Thanks for showing your interest {{ name }}! We will get in touch with you shortly. Meanwhile register below to explore Scribe!")
+  if(request.method=="POST"):
+    name=request['name']
+    email=request['email']
+    subject=name+" is interested in scribe!"
+    msg = Message(
+      subject,
+      recipients=["sachin@tryscribe.com"],
+      html=email,
+      sender=app.config['MAIL_DEFAULT_SENDER']
+    )
+    mail.send(msg)
+    flash("Thanks for showing your interest {{ name }}! We will get in touch with you shortly. Meanwhile register below to explore Scribe!")
   return redirect(url_for('register'))
 # ----------------------------------------------------------------------------#
 # Site functions
