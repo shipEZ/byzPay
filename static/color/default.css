@@ -7,10 +7,10 @@ section {
 }
 
 .color {
-	color: #00B289;
+	color: #e63d3d;
 }
 .alert {
-    color:#00B289;
+    color:#e63d3d;
 }
 
 .well.well-trans.backgroundWhite {
@@ -18,7 +18,7 @@ section {
 }
 
 .thickBottomBorder {
-    border-bottom: solid #666666;
+    border-bottom: solid #575757;
 }
 
 .navbar.navbar-custom {
@@ -26,26 +26,26 @@ section {
 }
 
 .navbar-custom ul.nav li a {
-    color:#00B289;
+    color:#575757;
 }
 
 .btn {
-    background-color:#00B289;
+    background-color:#575757;
 }
 
 .homeContainer input.btn {
-    background-color:#666;
+    background-color:#575757;
 }
 
 /* button */
 .btn-skin {
-  background-color: #00B289;
+  background-color: #e63d3d;
   border-color: #4ACCD1;
 }
 
 a:hover,.icon-success,.pagination>li>a,
 a:focus {
-    color: #00B289;
+    color: #e63d3d;
 }
 
 @media (max-width: 979px) and (min-width: 768px) {
@@ -61,7 +61,7 @@ footer {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color:#666;
+    color:#575757;
 }
 /*
 #indexMain h1, h2, h3, h4, h5, h6 {
@@ -69,11 +69,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 */
 a{
-    color:#666666;
+    color:#575757;
 }
 
 .btn:hover{
-    background-color:#4ACCD1;
+    background-color:#e63d3d;
 }
 
 .navbar-collapse, .sub-footer{
@@ -85,7 +85,7 @@ a{
 }
 
 ul.topnav li a {
-    color:#666;
+    color:#575757;
 }
 .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover,
 .pagination>.active>a:focus, .pagination>.active>span:focus{
@@ -126,10 +126,15 @@ ul.topnav li a {
 .navbar-custom ul.nav ul.dropdown-menu li a:hover {
 	color: #3fbbc0;
 }
+
+.siteTitle{
+    color:#e63d3d;
+}
+
 .navbar-custom.top-nav-collapse .nav li a:hover,
 .navbar-custom .nav li a:hover,
 .navbar-custom .nav li.active a,.navbar-custom.top-nav-collapse .nav li.active a  {
-    color: #3fbbc0;
+    color: #e63d3d;
 }
 
 

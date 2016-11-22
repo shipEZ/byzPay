@@ -402,6 +402,10 @@ def forgot_password():
 def home():
   return render_template('pages/home.html')
 
+@app.route('/landing',methods=["GET", "POST"])
+def landing():
+  return render_template('pages/main_old.html')
+
 @app.route('/supplier', methods=["GET", "POST"])
 def index_supplier():
   return render_template('pages/indexSupplier.html')
@@ -429,7 +433,35 @@ def request_demo():
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-  return redirect(url_for('index_enterprise'))
+  form1 = RequestDemo(request.form)
+  form2 = ContactForm(request.form)
+  formInput=False
+  if form1.validate_on_submit():
+    form=form1
+    formInput=True
+  elif form2.validate_on_submit():
+    form = form2
+    formInput=True
+  if formInput:
+    with mail.connect() as conn:
+      name = form.data['name']
+      phone = form.data['phone']
+      email = form.data['email']
+      message = form.data['message']
+      subject = name+" is interested in scribe!"
+      msg = Message(
+        subject,
+        recipients=["sachin@tryscribe.com"],
+        html=" name: " + name + "\n email: " + email + "\n phone: " + str(phone) + "\n message: " + message,
+        sender=app.config['MAIL_DEFAULT_SENDER']
+      )
+      print msg
+      conn.send(msg)
+    enterprise = Business("", "", form1.data['email'], "", form1.data['phone'])
+    db.session.add(enterprise)
+    db.session.commit()
+    flash("Thanks for your interest! We'll be in touch soon.", 'success')
+  return render_template('pages/index.html', form1=form1, form2=form2)
 
 @app.route('/ycdemo', methods=["GET", "POST"])
 def ycdemo():
@@ -476,16 +508,37 @@ if not app.debug:
 @app.route('/onboarding',methods=["GET", "POST"])
 def onboarding():
   form=MailerForm(request.form)
-  if request.method=='POST':
+  '''
+  emails = ["jn4@sanmargroup.com",
+            "rs514@sanmargroup.com",
+            "castings@texmo.com",
+            "info@hariharalloy.com",
+            "archana@hariharalloy.com",
+            "chennai@manisfoundry.com", "divesh.sapra@tangerinedesign.co.in",
+            "info@jiva-designs.com", "boopathi@techzoneapparels.com", "swamyvenkat_lingam@yahoo.com",
+            "sunil@craftstemple.com", "sales@craftstemple.com", "mail@rsgraphicsindia.com",
+            "sudheer@mudarindia.com","sarathhetero04@gmail.com","anuj@lewindia.com"]
+  names = ["Naveen",
+           "Suresh",
+           "Texmo",
+           "Harihar Alloy",
+           "Archana",
+           "Manis Foundry", "Divesh",
+           "Jiva Designs", "Boopati", "Venkat",
+           "sunil", "sales", "RS Graphics",
+           "Sudheer","Sarath","Anuj"]
+  '''
+  emails=["sachinbhat.as@gmail.com"]
+  names=["sachin"]
+  for i in xrange(len(names)):
     subject="Get cheap US Dollar Credit Line today!"
-    email = "sachinbhat.as@gmail.com"
-    name = "sachin"
+    email = emails[i]
+    name = names[i]
     attachment = "static/files/scribeForCustomers.pdf"
-    emails={}
-    emails["1"] = sendMailers(name, email, subject, attachment,
-                "onboarding")
-    print emails
-    flash("email has been sent!")
+    emailList={}
+    emailList[name] = sendMailers(name, email, subject, attachment,"onboarding")
+  print emailList.keys()
+  flash("email has been sent to: ",emailList.keys())
   return render_template('forms/mailerForm.html',form=form)
 
 @app.route('/onboard', methods=["GET", "POST"])
@@ -495,10 +548,10 @@ def onboard():
     email=request.args.get('email')
     print name
     print email
-    subject=name+" is interested in scribe!"
+    subject=name+"with email" + email +" is interested in scribe!"
     msg = Message(
       subject,
-      recipients=["rutika@tryscribe.com"],
+      recipients=["sachin@tryscribe.com"],
       html=email,
       sender=app.config['MAIL_DEFAULT_SENDER']
     )
@@ -642,11 +695,11 @@ def sendMailers(name, email, subject, attachment, htmlFile):
   with mail.connect() as conn:
     html = render_template(mailers[htmlFile], name=name)
     msg = Message(sender=app.config['MAIL_DEFAULT_SENDER'],
-                    recipients=[email],
+                    recipients=[email,"sachin@tryscribe.com"],
                     html=html,
                     subject=subject)
     with app.open_resource(attachment) as fp:
-      msg.attach(fp.name, "application/pdf", fp.read())
+      msg.attach("ScribeFactoring.pdf", "application/pdf", fp.read())
     conn.send(msg)
   return email
 

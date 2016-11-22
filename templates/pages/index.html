@@ -1,0 +1,276 @@
+{% extends 'layouts/index.html' %}
+{% block content %}
+
+	<!-- Section: intro -->
+    <section id="intro" class="intro thickBottomBorder">
+		<div class="intro-content">
+			<div class="container">
+				<div class="row">
+					<div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
+						<p class="mainText">Trade Finance for the 21st century!</p>
+					</div>
+					<div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s"></div>
+					<div class="mainSubText">
+						<p>We connect all supply chain participants allowing for rapid fraud free supplier receivable financing</p>
+					</div>
+					<div>
+						<form role="form" method="post" class="mainForm">
+							{% if form1.csrf_token.errors %}
+							  <div class="warning">You have submitted an invalid CSRF token</div>
+							{% endif %}
+							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+							<div>
+								<p style="text-align:center">Interested in knowing how we do it?</p>
+								<div class="col-xs-6 col-sm-6 col-md-6 mainFormBoxes">
+									<div>
+										{{ form1.name(class_ = 'form-control', required = true, placeholder = form1.name.label.text) }}
+									</div>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6 mainFormBoxes">
+									<div>
+										{{ form1.email(class_ = 'form-control', required = true, placeholder = form1.email.label.text) }}
+									</div>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6 mainFormBoxes">
+									<div>
+										{{ form1.phone(class_ = 'form-control', required = true, placeholder = form1.phone.label.text) }}
+									</div>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6 mainFormBoxes">
+									<div>
+										{{ form1.message(class_ = 'form-control', required = true, placeholder = form1.message.label.text) }}
+									</div>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6 mainFormBoxes">
+									<div>
+										<input type="submit" value="Submit" class="btn btn-skin btn-block btn-lg mainBtn">
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>		
+			</div>
+		</div>		
+    </section>
+	
+	<!-- /Section: intro -->
+
+	
+	<!-- Section: features -->
+    <section id="exporters" class="home-section nopadding paddingtop-60 thickBottomBorder textAlignCenter">
+
+		<div class="container">
+			<div class="containerTitle">
+			<h2 class="color"> Exporters </h2>
+				<h6> Get <strong>collateral free</strong> working capital at foreign currency discount rates! </h6>
+			</div>
+        <div class="row">
+			<div class="col-sm-3 col-md-3">
+				<div class="wow fadeInRight" data-wow-delay="0.1s">
+                <div class="service-box">
+					<div>
+						<span class="fa fa-handshake-o fa-3x  fa-fw icon-feature"></span>
+					</div>
+					<div class="service-desc">
+						<h5 class="h-light color">We take your credit risk</h5>
+						<p>We purchase your invoices and wait for your buyer to pay later. Therefore, forget about any non-payment risk as we manage collections for you</p>
+					</div>
+                </div>
+				</div>
+            </div>
+			<div class="col-sm-3 col-md-3">
+				
+				<div class="wow fadeInRight" data-wow-delay="0.3s">
+				<div class="service-box">
+					<div>
+						<span class="fa fa-usd fa-3x  fa-fw icon-feature"></span>
+					</div>
+					<div class="service-desc">
+						<h5 class="h-light color">USD discount rates</h5>
+						<p>Take control of your working capital by selling your trade receivables at USD interest rates that your local lenders cannot provide! Also we don't need any collateral!</p>
+					</div>
+
+                </div>
+				</div>
+
+            </div>
+            <div class="col-sm-3 col-md-3">
+				<div class="wow fadeInRight" data-wow-delay="0.3s">
+				<div class="service-box">
+					<div>
+						<span class="fa fa-paper-plane-o fa-3x  fa-fw icon-feature"></span>
+					</div>
+					<div class="service-desc">
+						<h5 class="h-light color">Paperless trade</h5>
+						<p>We bring all trade documentation on a single common electronic platform. This also allows us to manage all your accounts receivables for zero fees!</p>
+					</div>
+                </div>
+				</div>
+            </div>
+			
+        </div>		
+		</div>
+	</section>
+
+	<section id="importers" class="home-section nopadding paddingtop-60 thickBottomBorder">
+
+		<div class="container">
+			<div class="containerTitle textAlignCenter">
+			<h2 class="color"> Importers </h2>
+				<h6> Scribe partners with corporations to provide supplier invoice funding to 100% of the supply-chain! </h6>
+			</div>
+        <div class="row">
+			<div class="midText floatLeft">
+				<div class="wow fadeInRight" data-wow-delay="0.1s">
+                <div class="service-box">
+					<div class="service-desc">
+						<h5 class="h-light color">Open account terms</h5>
+						<p>Scribe funds your supplier invoices in advance and collects payment at a later date, allowing you to have open account terms! Further, this will improve your credit standing allowing you to get better credit with your banks</p>
+					</div>
+                </div>
+				</div>
+            </div>
+			<div class="floatLeft">
+				<span class="fa fa-unlink fa-4x  fa-fw icon-feature"></span>
+			</div>
+		</div>
+			<div class="row">
+			<div class="midText floatLeft">
+				<div class="wow fadeInRight" data-wow-delay="0.3s">
+				<div class="service-box">
+					<div class="service-desc">
+						<h5 class="h-light color">Increased supplier velocity</h5>
+						<p>Don't let your supplier's reduced access to working capital affect your business. Scribe lets you provide easy working capital to your suppliers while you continue to enjoy delayed payment terms</p>
+					</div>
+
+                </div>
+				</div>
+            </div>
+			<div class="floatLeft">
+				<span class="fa fa-bolt fa-4x  fa-fw icon-feature"></span>
+			</div>
+        </div>
+		</div>
+	</section>
+
+	<section id="investors" class="home-section nopadding paddingtop-60 thickBottomBorder textAlignCenter">
+
+		<div class="container">
+			<div class="containerTitle">
+			<h2 class="color"> Investors </h2>
+				<h6> Get programmable access to a continuous stream of recurring low risk high returns assets! </h6>
+			</div>
+        <div class="row">
+			<div class="col-sm-3 col-md-3">
+				<div class="wow fadeInRight" data-wow-delay="0.1s">
+                <div class="service-box">
+					<div>
+						<span class="fa fa-line-chart fa-3x  fa-fw icon-feature"></span>
+					</div>
+					<div class="service-desc">
+						<h5 class="h-light color">Recurring receivables</h5>
+						<p>Scribe end-user integration lets you access a continuous stream of low risk receivables of large creditworthy US buyers! These invoices are of short 60-90 days duration and are recurring in nature.</p>
+					</div>
+                </div>
+				</div>
+            </div>
+			<div class="col-sm-3 col-md-3">
+
+				<div class="wow fadeInRight" data-wow-delay="0.3s">
+				<div class="service-box">
+					<div>
+						<span class="fa fa-university fa-3x  fa-fw icon-feature"></span>
+					</div>
+					<div class="service-desc">
+						<h5 class="h-light color">Diversified asset class</h5>
+						<p>Our large pool of receivables from many corporate importers lets you diversify your risk while maximizing returns!</p>
+					</div>
+
+                </div>
+				</div>
+
+            </div>
+            <div class="col-sm-3 col-md-3">
+				<div class="wow fadeInRight" data-wow-delay="0.3s">
+				<div class="service-box">
+					<div>
+						<span class="fa fa-cog fa-3x  fa-fw icon-feature"></span>
+					</div>
+					<div class="service-desc">
+						<h5 class="h-light color">Fraud detection</h5>
+						<p>Our connected network allows us to get all the right datasets to detect any fraud before it happens. Therefore, we take all the fraud risk so that you don't have to worry about a thing</p>
+					</div>
+                </div>
+				</div>
+            </div>
+
+        </div>
+		</div>
+	</section>
+
+	<section id="contact" class="home-section nopadding paddingtop-60">
+
+		<div class="container">
+			<div class="containerTitle textAlignCenter" style="padding-bottom:0px">
+				<h2 class="color"> Contact us </h2>
+				<h6> Don't be afraid to reach out. You + Us = Awesome. </h6>
+			</div>
+        <div class="row">
+			<div class="halfWidth floatLeft">
+				<form role="form" method="post" class="contactForm">
+					{% if form2.csrf_token.errors %}
+					  <div class="warning">You have submitted an invalid CSRF token</div>
+					{% endif %}
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+					<div>
+						<div>
+							<div class="contactFormBox">
+								{{ form2.name(class_ = 'form-control', required = true, placeholder = form2.name.label.text) }}
+							</div>
+						</div>
+						<div>
+							<div  class="contactFormBox">
+								{{ form2.email(class_ = 'form-control', required = true, placeholder = form2.email.label.text) }}
+							</div>
+						</div>
+						<div>
+							<div  class="contactFormBox">
+								{{ form2.phone(class_ = 'form-control', required = true, placeholder = form2.phone.label.text) }}
+							</div>
+						</div>
+						<div>
+							<div  class="contactFormBox">
+								{{ form2.message(class_ = 'form-control', required = true, placeholder = form2.message.label.text) }}
+							</div>
+						</div>
+						<div>
+							<div>
+								<input type="submit" value="Submit" class="btn btn-skin btn-block btn-lg mainBtn">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="halfWidth floatLeft">
+				<div class="wow fadeInDown contactText" data-wow-delay="0.1s">
+					<div class="widget">
+						<p>
+							<span class="fa fa-map-marker fa-1x icon-footer"></span>450 Townsend, San Francisco, CA - 94107
+							<br>
+							<br>
+							<span class="fa fa-envelope fa-1x icon-footer"></span>Email:&nbsp;&nbsp;support@tryscribe.com
+							<br>
+							<br>
+							<span class="fa fa-phone fa-1x icon-footer"></span>Phone:&nbsp;&nbsp;+1-4157469935
+						</p>
+						<!--<script src='https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyC3eQG_fHJX7gTfpVPYw-8S1Ohqf68VJK8'></script><div style='overflow:hidden;height:200px;width:200px;'><div id='gmap_canvas' style='height:200px;width:200px;'></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div> <a href='https://embedmap.org/'>how to add google maps to my website</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=d66e9e6e7849715032ee17e21f886e1850c421cc'></script><script type='text/javascript'>function init_map(){var myOptions = {zoom:13,center:new google.maps.LatLng(37.774634,-122.39864169999998),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(37.774634,-122.39864169999998)});infowindow = new google.maps.InfoWindow({content:'<strong></strong><br>450 Townsend Street<br>94107 San Francisco<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>-->
+					</div>
+				</div>
+			</div>
+        </div>
+		</div>
+	</section>
+	<!-- /Section: services -->
+
+{% endblock %}

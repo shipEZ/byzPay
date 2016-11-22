@@ -19,7 +19,7 @@ MAIL_USE_TLS = False
 MAIL_USE_SSL = True
 
 # mail accounts
-MAIL_DEFAULT_SENDER = 'hi@tryscribe.com'
+MAIL_DEFAULT_SENDER = 'sachin@tryscribe.com'
 
 # Stripe test configs
 STRIPE_CLIENT_ID = 'ca_9KNKL89g9NkEqU0sunL2HuVZGSLdiBPD'

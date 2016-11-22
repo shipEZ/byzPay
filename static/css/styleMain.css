@@ -12,15 +12,14 @@ border: 1px solid red;
 body {
     width: 100%;
     height: 100%;
-    font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
-    color: #666;
+    color: #575757;
     /*background-color:#f9f9f9;*/
     background-color:#fff;
 	font-size: 16px;
     line-height: 1.6em;
     border: 1px solid transparent;
-    font-family:'Roboto', sans-serif;
+    font-family:'roboto', sans-serif;
 }
 
 html {
@@ -38,11 +37,21 @@ textarea {
   line-height: inherit;
 }
 
+.siteLogo {
+    width:30px;
+}
+
+.siteTitle {
+    padding-top:50px;
+    padding-left:10px;
+    font-size:120%;
+}
+
 main {
     margin-top:58px;
     min-height:75%;
     background:transparent;
-    color: #717171;
+    background-color: #fff;
 }
 
 table{
@@ -67,16 +76,54 @@ form {
 	margin-top:5%;
 	margin-bottom: 5%;
 }
+
+.alert {
+    margin-bottom:0px;
+    text-align:center;
+}
 /* ===========
 page styles
 ============= */
 
-/*
+
 #intro {
-    background: url(../img/bg1.jpg) repeat left top;
-    opacity:1;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../img/bgFinal.jpg) repeat left top;
+    opacity:20;
+    background-size: 100% 100%;
+    min-height:500px;
 }
-*/
+
+.mainText {
+    margin-top:20px;
+    text-align:center;
+    color:#fff;
+    font-size:300%;
+}
+
+.mainSubText{
+    text-align:center;
+    margin:auto;
+    margin-top:80px;
+    width:80%;
+    color:#fff;
+    font-size:120%;
+}
+
+.mainForm {
+    background:transparent;
+    border:none;
+    color:#fff;
+    width:80%;
+}
+
+.mainFormBoxes {
+    width:20%;
+}
+
+.contactFormBox {
+    padding-bottom:20px;
+}
+
 .homeContainer {
     margin-left:20px;
     margin-right:20px;
@@ -92,6 +139,27 @@ page styles
 }
 
 .floatLeft {
+    float:left;
+}
+
+.containerTitle {
+    padding-bottom:60px;
+}
+
+.textAlignCenter {
+    text-align:center;
+}
+
+.contactText {
+    padding-top:50px;
+    width:60%;
+    margin:auto;
+}
+
+.midText {
+    width:80%;
+    padding-right:130px;
+    padding-bottom:70px;
     float:left;
 }
 
@@ -372,31 +440,14 @@ Navigation
 	-o-box-shadow: 0 1px 6px rgba(0,0,0,.2);
 }
 
-.navbar.navbar-custom .navigation {
-	padding-bottom: 15px;
-
-}
-
 .navbar {
-    margin-bottom: 0;
-    border-bottom: 1px solid rgba(255,255,255,.3);
-
+    height:60px;
+    vertically-align:middle;
 }
 
-.navbar-brand {
-    font-weight: 700;
-}
-
-.navbar-brand:focus {
-    outline: 0;
-}
-
-.navbar-custom.top-nav-collapse .nav.topnav {
-    background-color: rgba(0,0,0,0);
-}
-
-.navbar.navbar-custom {
-	padding-top: 0;
+.nav>li>a {
+    padding:0 10px;
+    padding:0 10px;
 }
 
 .navbar.navbar-custom ul.nav.topnav {
@@ -415,7 +466,6 @@ Navigation
 .navbar-custom ul.nav li a {
 	font-size: 14px;
 	letter-spacing: 1px;
-    color: #666;
 	text-transform: uppercase;
 	font-weight: 700;
 	background: transparent;
@@ -424,9 +474,8 @@ Navigation
 
 
 .navbar-brand {
-  padding-top: 15px;
-  margin-top: 5px;
-  padding-bottom: 0;
+  padding-top:auto;
+  font-weight: bold;
 }
 
 .navbar-custom ul.navbar-brand li a {
@@ -434,7 +483,7 @@ Navigation
 }
 
 .navbar.navbar-custom.top-nav-collapse .navigation {
-	padding-bottom: 10px;
+	padding-bottom: 0px;
 }
 
 .navbar-custom.top-nav-collapse ul.nav li a {
@@ -500,6 +549,13 @@ TEST TBD
     background-color:#fff;
 }
 
+.navbar-header{
+    padding-left:100px;
+}
+
+.navbar-nav{
+    padding-right:100px;
+}
 /* ===========================
 --- Footer
 ============================ */
@@ -643,7 +699,7 @@ Buttons
 
 .btn-lg,
 .btn-group-lg > .btn {
-  padding: 10px 16px;
+  padding: 6px 16px;
   font-size: 20px;
   line-height: 1.5em;
   border-radius: 6px;

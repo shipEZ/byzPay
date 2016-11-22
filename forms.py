@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import TextField, PasswordField, IntegerField, DateField
+from wtforms import TextField, PasswordField, IntegerField, DateField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, EqualTo, Length, Email, ValidationError
 from wtforms import validators
 from wtforms.fields.html5 import EmailField
@@ -107,6 +107,9 @@ class ResetPasswordSubmit(Form):
 
 
 class RequestDemo(Form):
+    name = TextField(
+        'Name', validators=[DataRequired(message="Please enter your name")]
+    )
     email = EmailField(
         'Email', validators=[DataRequired(message="Please enter your email address"),
                                 validators.Email("Please enter correct email address.")]
@@ -114,3 +117,19 @@ class RequestDemo(Form):
     phone = IntegerField(
         'Phone', validators=[DataRequired(message="Please enter your phone number")]
     )
+    message = SelectField('entityType',
+        choices=[('Exporter','Exporter'), ('Importer','Importer'), ('Investor', 'Investor')])
+
+
+class ContactForm(Form):
+    email = EmailField(
+        'Email', validators=[DataRequired(message="Please enter your email address"),
+                             validators.Email("Please enter correct email address.")]
+    )
+    name = TextField(
+        'Name', validators=[DataRequired(message="Please enter your name")]
+    )
+    phone = IntegerField(
+        'Phone', validators=[DataRequired(message="Please enter your phone number")]
+    )
+    message = TextAreaField('Message', validators=[DataRequired(message="Please enter message")])
