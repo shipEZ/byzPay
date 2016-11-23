@@ -118,6 +118,7 @@ page styles
 
 .mainFormBoxes {
     width:20%;
+    margin:auto;
 }
 
 .contactFormBox {
@@ -179,6 +180,28 @@ page styles
     .halfWidth{
         width:80%;
     }
+
+    .mainFormBoxes {
+        width:60%;
+    }
+
+    .col-sm-3.col-md-3 {
+        width:80%;
+        margin:auto;
+    }
+
+    .midTextRow {
+        width:80%;
+        margin:auto;
+        text-align:center;
+    }
+    .midText {
+        width:80%;
+        margin:auto;
+        text-align:center;
+        padding:0px;
+    }
+
 }
 
 
