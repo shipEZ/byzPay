@@ -478,15 +478,15 @@ def ycdemo():
 
 @app.route('/sendGridEventNotification',methods=["GET", "POST"])
 def parser():
-  print "HTTP/1.1 200 OK"
-  envelope=json.loads(request.body)
+  #envelope=json.loads(request.body)
   with mail.connect() as conn:
-    html = json.dumps(envelope)
+    #html = json.dumps(envelope)
     msg = Message(sender=app.config['MAIL_DEFAULT_SENDER'],
                     recipients=["sachinbhat.as@gmail.com"],
-                    html=html,
+                    html="test mail",
                     subject="send grid event notification")
     conn.send(msg)
+  print "HTTP/1.1 200 OK"
   return "OK"
 
 @app.route('/about')
