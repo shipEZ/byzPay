@@ -479,8 +479,7 @@ def ycdemo():
 @app.route('/sendGridEventNotification',methods=["GET", "POST"])
 def parser():
   print "HTTP/1.1 200 OK"
-  # Consume the entire email
-  envelope = simplejson.loads(request.form.get('envelope'))
+  envelope=json.loads(request.body)
   with mail.connect() as conn:
     html = json.dumps(envelope)
     msg = Message(sender=app.config['MAIL_DEFAULT_SENDER'],
