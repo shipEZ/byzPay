@@ -7,6 +7,7 @@ from flask import url_for, redirect
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 import flask_excel as excel
+import pandas as pd
 from flask_wtf.csrf import CsrfProtect
 import logging
 from logging import Formatter, FileHandler
@@ -15,7 +16,7 @@ from datetime import datetime, timedelta
 from pyinvoice.models import InvoiceInfo, ClientInfo, Item, ServiceProviderInfo
 from pyinvoice.templates import SimpleInvoice
 from flask import request
-import json, os, urllib, requests
+import json, os, urllib, requests, simplejson
 from flask_mail import Mail, Message
 from flask_paginate import Pagination
 from flask_migrate import Migrate
@@ -37,7 +38,12 @@ from forms import *
 from paymentFunctions import stripe_payment
 
 mailers={}
-mailers["onboarding"]="mailer/onboarding.html"
+mailers["postCall"]="mailer/postCall.html"
+mailers["firstInteraction"]="mailer/firstInteraction.html"
+class Client(object):
+  name = ""
+  email = ""
+  company = ""
 
 csrf = CsrfProtect(app)
 login_manager = LoginManager()
@@ -470,6 +476,20 @@ def ycdemo():
   print current_user
   return redirect(request.args.get('next') or url_for('home'))
 
+@app.route('/sendGridEventNotification',methods=["GET", "POST"])
+def parser():
+  # Required response to SendGrid.com’s Parse API
+  print "HTTP/1.1 200 OK"
+  # Consume the entire email
+  envelope = simplejson.loads(request.form.get('envelope'))
+  with mail.connect() as conn:
+    html = json.dumps(envelope)
+    msg = Message(sender=app.config['MAIL_DEFAULT_SENDER'],
+                    recipients=["sachinbhat.as@gmail.com"],
+                    html=html,
+                    subject="send grid event notification")
+    conn.send(msg)
+  return "OK"
 
 @app.route('/about')
 def about():
@@ -528,16 +548,20 @@ def onboarding():
            "sunil", "sales", "RS Graphics",
            "Sudheer","Sarath","Anuj"]
   '''
-  emails=["sachinbhat.as@gmail.com"]
-  names=["sachin"]
-  for i in xrange(len(names)):
-    subject="Get cheap US Dollar Credit Line today!"
-    email = emails[i]
-    name = names[i]
-    attachment = "static/files/scribeForCustomers.pdf"
+  #mailDF = pd.read_csv('mailList.csv')
+  #mailDict = mailDF.to_dict()
+  mailDict={"Name":{"0":"Sachin"},"email":{"0":"sachinbhat.as@gmail.com"},"Company":{"0":"TEST CO"}}
+  for i in xrange(len(mailDict['Name'].values())):
+    subject="Export factoring and bill discounting marketplace - Scribe"
+    client = Client()
+    client.email = mailDict['email'].values()[i].lower()
+    client.name = mailDict['Name'].values()[i].lower()
+    client.company=mailDict['Company'].values()[i].lower()
+    attachment = None #"static/files/scribeForCustomers.pdf"
     emailList={}
-    emailList[name] = sendMailers(name, email, subject, attachment,"onboarding")
+    emailList[client.name] = sendMailers(client, subject, attachment,"firstInteraction")
   print emailList.keys()
+  os.remove('mailList.csv')
   flash("email has been sent to: ",emailList.keys())
   return render_template('forms/mailerForm.html',form=form)
 
@@ -691,17 +715,18 @@ def createInvoice(excelContent, current_user):
     invoiceDict['invoice' + str(invoice.id) + '.pdf'] = invoice
   return invoiceDict
 
-def sendMailers(name, email, subject, attachment, htmlFile):
+def sendMailers(client,subject, attachment, htmlFile):
   with mail.connect() as conn:
-    html = render_template(mailers[htmlFile], name=name)
+    html = render_template(mailers[htmlFile], client=client)
     msg = Message(sender=app.config['MAIL_DEFAULT_SENDER'],
-                    recipients=[email,"sachin@tryscribe.com"],
+                    recipients=[client.email],
                     html=html,
                     subject=subject)
-    with app.open_resource(attachment) as fp:
-      msg.attach("ScribeFactoring.pdf", "application/pdf", fp.read())
+    if(attachment is not None):
+      with app.open_resource(attachment) as fp:
+        msg.attach("ScribeFactoring.pdf", "application/pdf", fp.read())
     conn.send(msg)
-  return email
+  return client.email
 
 
 def sendReminder(invoiceDict):
