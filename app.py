@@ -478,7 +478,6 @@ def ycdemo():
 
 @app.route('/sendGridEventNotification',methods=["GET", "POST"])
 def parser():
-  # Required response to SendGrid.com’s Parse API
   print "HTTP/1.1 200 OK"
   # Consume the entire email
   envelope = simplejson.loads(request.form.get('envelope'))
