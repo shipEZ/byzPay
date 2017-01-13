@@ -133,3 +133,15 @@ class ContactForm(Form):
         'Phone', validators=[DataRequired(message="Please enter your phone number")]
     )
     message = TextAreaField('Message', validators=[DataRequired(message="Please enter message")])
+
+class mediaSignUp(Form):
+    name = TextField(
+        'Full Name', validators=[DataRequired(message="Please enter your name")]
+    )
+    email = EmailField(
+        'Email', validators=[DataRequired(message="Please enter your email address"),
+                                validators.Email("Please enter correct email address.")]
+    )
+    phone = IntegerField(
+        'Phone', validators=[DataRequired(message="Please enter your phone number")]
+    )

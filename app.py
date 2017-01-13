@@ -437,8 +437,28 @@ def request_demo():
     #return redirect(url_for("login"))
   return render_template('forms/requestDemo.html', form=form)
 
-@app.route('/', methods=["GET", "POST"])
+@app.route('/',methods=["GET","POST"])
 def index():
+  form=mediaSignUp(request.form)
+  if form.validate_on_submit():
+    with mail.connect() as conn:
+      name = form.data['name']
+      phone = form.data['phone']
+      email = form.data['email']
+      subject = name + " is interested in scribe media financing!"
+      msg = Message(
+        subject,
+        recipients=["sachin@tryscribe.com"],
+        html=" name: " + name + "\n email: " + email + "\n phone: " + str(phone),
+        sender=app.config['MAIL_DEFAULT_SENDER']
+      )
+      print msg
+      conn.send(msg)
+    flash("Thanks for signing up! A representative will be in touch soon.", 'success')
+  return render_template('layouts/indexMedia.html', form=form)
+
+@app.route('/export', methods=["GET", "POST"])
+def export():
   form1 = RequestDemo(request.form)
   form2 = ContactForm(request.form)
   formInput=False
@@ -471,6 +491,7 @@ def index():
 
 @app.route('/ycdemo', methods=["GET", "POST"])
 def ycdemo():
+  #not needed anymore. delete this!
   user = Business.query.filter_by(email='yc@yc.com').first()
   login_user(user, remember=True)
   print current_user
@@ -478,6 +499,7 @@ def ycdemo():
 
 @app.route('/sendGridEventNotification',methods=["GET", "POST"])
 def parser():
+  #pointless function/route. Delete this!
   #envelope=json.loads(request.body)
   with mail.connect() as conn:
     #html = json.dumps(envelope)
