@@ -437,7 +437,7 @@ def request_demo():
     #return redirect(url_for("login"))
   return render_template('forms/requestDemo.html', form=form)
 
-@app.route('/',methods=["GET","POST"])
+@app.route('/media',methods=["GET","POST"])
 def index():
   form=mediaSignUp(request.form)
   if form.validate_on_submit():
@@ -457,7 +457,30 @@ def index():
     flash("Thanks for signing up! A representative will be in touch soon.", 'success')
   return render_template('layouts/indexMedia.html', form=form)
 
-@app.route('/export', methods=["GET", "POST"])
+@app.route('/application',methods=["GET","POST"])
+def factoringApplication():
+  '''
+  form = factoringApplication(request.form)
+  if form.validate_on_submit():
+    with mail.connect() as conn:
+      name = form.data['name']
+      phone = form.data['phone']
+      email = form.data['email']
+      subject = name + " is interested in scribe media financing!"
+      msg = Message(
+        subject,
+        recipients=["sachin@tryscribe.com"],
+        html=" name: " + name + "\n email: " + email + "\n phone: " + str(phone),
+        sender=app.config['MAIL_DEFAULT_SENDER']
+      )
+      print msg
+      conn.send(msg)
+    flash("Thanks for signing up! A representative will be in touch soon.", 'success')
+  '''
+  return render_template('pages/factoringApplication.html')
+
+
+@app.route('/', methods=["GET", "POST"])
 def export():
   form1 = RequestDemo(request.form)
   form2 = ContactForm(request.form)
