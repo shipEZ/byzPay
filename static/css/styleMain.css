@@ -85,6 +85,15 @@ form {
 page styles
 ============= */
 
+/* factoringApplication form css */
+.formA {
+    background-color:#FFFFFF;
+    font-size:14px;
+    font-family:'Open Sans','Helvetica Neue','Helvetica',Arial,Verdana,sans-serif;
+    color:#666666;
+    width:780px;
+    min-width:150px
+}
 
 #intro {
     background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../img/bgFinal.jpg) repeat left top;

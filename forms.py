@@ -118,7 +118,7 @@ class RequestDemo(Form):
         'Phone', validators=[DataRequired(message="Please enter your phone number")]
     )
     message = SelectField('entityType',
-        choices=[('Exporter','Exporter'), ('Importer','Importer'), ('Investor', 'Investor')])
+        choices=[('Publisher','Publisher'), ('App developer','App developer'), ('publisher network', 'publisher network'), ('ad tech', 'ad tech')])
 
 
 class ContactForm(Form):
@@ -135,6 +135,18 @@ class ContactForm(Form):
     message = TextAreaField('Message', validators=[DataRequired(message="Please enter message")])
 
 class mediaSignUp(Form):
+    name = TextField(
+        'Full Name', validators=[DataRequired(message="Please enter your name")]
+    )
+    email = EmailField(
+        'Email', validators=[DataRequired(message="Please enter your email address"),
+                                validators.Email("Please enter correct email address.")]
+    )
+    phone = IntegerField(
+        'Phone', validators=[DataRequired(message="Please enter your phone number")]
+    )
+
+class factoringApplication(Form):
     name = TextField(
         'Full Name', validators=[DataRequired(message="Please enter your name")]
     )
